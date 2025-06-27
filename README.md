@@ -1,32 +1,183 @@
-# Senior Living Discovery Tool
+# 🏠 Senior Living Discovery Tool
 
-A web-based application for processing and analyzing senior living facility data from spreadsheets.
+## 🚀 Revolutionary Enhancement: One Row Per Query Term with Hyperlinks
+
+The Senior Living Discovery Tool now features a **completely redesigned data structure** that returns **one row per query term** with **15-character context snippets** and **automatic hyperlink generation** for spreadsheet formats.
+
+### 🎯 Key Improvements
+
+#### Enhanced Result Format
+- **One Row Per Query Term**: Each keyword gets its own result row for maximum clarity
+- **15-Character Context Snippets**: Precisely formatted context with exactly 15 characters before and after each match
+- **Hyperlink Generation**: Automatic creation of clickable Excel HYPERLINK() formulas for .xls, .xlsx, and .ods formats
+- **Anchor Link Integration**: URLs include fragment identifiers (#search-term) for direct navigation to highlighted text
+- **Match Type Classification**: Results categorized as Exact, Partial, None, Error, or Skipped
+
+#### Advanced Data Export
+- **Excel HYPERLINK() Formulas**: Native Excel formulas for clickable results in spreadsheet formats
+- **Target="_blank" Links**: All hyperlinks open in new tabs with security attributes
+- **Optimized Column Widths**: Automatic column sizing for optimal readability
+- **Document Metadata**: Complete workbook properties including title, author, and creation date
 
 ## Features
 
 ### Core Functionality
-- **File Upload**: Supports .xlsx, .xls, .csv, and .ods formats
-- **Real-time Processing Status**: Visual progress tracking with detailed logging
-- **Search Integration**: Automated web searches for facility information
-- **Scoring System**: Keyword-based scoring against user criteria
-- **Export Options**: Download results in multiple formats
-- **Glassmorphic UI**: Modern, translucent interface design
+- **File Upload**: Supports .xlsx, .xls, .csv, and .ods formats with comprehensive validation
+- **Real-time Processing Status**: Visual progress tracking with detailed logging and error handling
+- **Enhanced Search Integration**: Multi-strategy search with sitemap-based recursive scraping
+- **Sitemap-Based Web Scraping**: Discovers and scrapes all pages in website sitemaps
+- **Advanced Keyword Analysis**: One row per query term with weighted scoring and context preservation
+- **Comprehensive Export Options**: Download results with hyperlinks in multiple formats
+- **Glassmorphic UI**: Modern, translucent interface design with accessibility features
 
-### Production Configuration (NEW)
+### 📊 Enhanced Result Structure (NEW)
+
+**Revolutionary Data Format**: Results now return one row per query term with 15-character context snippets and hyperlink support.
+
+#### Result Table Structure
+Each row represents analysis of one specific keyword:
+
+| Column | Description | Example |
+|--------|-------------|---------|
+| Name | Facility name | "Sunset Manor" |
+| Address | Full address | "123 Main St" |
+| Town | City/Town | "Springfield" |
+| State | State abbreviation | "IL" |
+| Zip | ZIP code | "62701" |
+| Query Term | Specific keyword analyzed | "assisted living" |
+| Match Type | Type of match found | "Exact" |
+| Total Matches | Number of matches | 3 |
+| Score | Weighted score | 6 |
+| Context Snippet | 15-char before/after context | "...provides assisted living services for..." |
+
+#### Hyperlink Format for Spreadsheet Exports
+- **Excel Formula**: `=HYPERLINK("https://domain.com/page.html#search-term","context snippet")`
+- **Target Behavior**: Opens in new tab with fragment navigation
+- **Security**: Includes `rel="noopener noreferrer"` attributes
+- **Supported Formats**: .xls, .xlsx, .ods (CSV uses plain text)
+
+### 🕷️ Sitemap-Based Web Scraping
+
+**Comprehensive Enhancement**: Sitemap-based recursive web scraping for maximum search coverage and accuracy.
+
+#### Key Features
+- **Automatic Sitemap Discovery**: Finds sitemaps through robots.txt and common paths
+- **Recursive Parsing**: Follows sitemap index files to discover all pages
+- **Intelligent Content Extraction**: Extracts meaningful text from HTML pages
+- **Advanced Keyword Matching**: Weighted scoring with context awareness
+- **Rate Limiting**: Configurable delays to respect server resources
+- **Error Recovery**: Robust fallback mechanisms and retry logic
+- **Performance Optimization**: Efficient memory usage and concurrent processing
+
+#### Search Strategy Hierarchy
+1. **Sitemap-Based Scraping** (Primary): Discovers and scrapes all pages in website sitemaps
+2. **Traditional Search Engines** (Secondary): Falls back to search engine APIs
+3. **Simulated Results** (Fallback): Intelligent fallback with criteria-based content
+
+#### Configuration Options
+- **Enable/Disable Toggle**: Control sitemap scraping functionality
+- **Max Pages per Site**: Limit pages scraped (5-200, default: 50)
+- **Scraping Delay**: Configure request delays (100-2000ms, default: 200ms)
+- **Timeout Settings**: Request timeout configuration
+- **Retry Attempts**: Number of retry attempts for failed requests
+
+#### Technical Implementation
+- **IIFE Module Pattern**: Avoids global state pollution
+- **Promise-Based Architecture**: Asynchronous processing with proper error handling
+- **CORS Proxy Support**: Multiple proxy services for cross-origin requests
+- **Comprehensive Testing**: Unit tests covering all scenarios and edge cases
+- **Enhanced Logging**: Detailed error logging with timestamp format
+
+For detailed technical documentation, see `SITEMAP_SCRAPING_README.md`.
+
+### Production Configuration (ENHANCED)
 - **API Service Management**: Configure free and paid search APIs with secure key storage
+- **Interactive API Suggestions**: Curated recommendations for Free, Premium, and Enterprise APIs
+- **Detailed Setup Guides**: Step-by-step instructions with direct links to provider documentation
+- **Multiple Provider Support**: SerpApi, Google Custom Search, Bing, DuckDuckGo, Azure, Elasticsearch, Algolia
 - **Rate Limiting Controls**: Configurable delays to respect API rate limits
 - **Caching System**: Optional result caching with customizable expiry settings
 - **Connection Testing**: Built-in API connectivity validation and diagnostics
 - **Configuration Persistence**: Settings automatically saved to localStorage
 - **Service Toggles**: Enable/disable individual search services with visual feedback
+- **Security Features**: API key masking, secure storage, and validation
 
 ### Enhanced Code Review & Documentation
 - **Comprehensive Architecture Overview**: Detailed technical documentation
 - **Security Implementation**: Client-side security measures and data protection
 - **Performance Optimizations**: Memory management and DOM optimization strategies
-- **Testing Framework**: Unit tests covering positive, negative, boundary, and edge cases
+- **Testing Framework**: Unit tests covering positive, negative, boundary, edge cases, and API guide system validation
 - **Error Handling**: Enterprise-grade logging with structured error format
 - **Browser Compatibility**: Progressive enhancement with feature detection
+
+## 🔍 API Provider Recommendations (NEW)
+
+The application now includes interactive API provider suggestions with detailed setup guides:
+
+### Free Tier APIs
+1. **SerpApi Free Tier**
+   - 100 searches per month
+   - Google, Bing, and other search engines
+   - Setup guide with account creation and API key instructions
+   - Direct links: [Sign Up](https://serpapi.com/users/sign_up) | [Documentation](https://serpapi.com/search-api)
+
+2. **DuckDuckGo Instant Answer API**
+   - Completely free with no rate limits
+   - No API key required
+   - Instant answer format
+   - Direct links: [API Docs](https://duckduckgo.com/api) | [Examples](https://duckduckgo.com/api#examples)
+
+3. **Bing Web Search API (Free)**
+   - 1,000 searches per month on Azure free tier
+   - Microsoft Cognitive Services
+   - Setup guide for Azure account creation
+   - Direct links: [Azure Free](https://azure.microsoft.com/free/) | [Bing Search APIs](https://azure.microsoft.com/services/cognitive-services/bing-web-search-api/)
+
+### Premium APIs
+1. **Google Custom Search API**
+   - 100 searches per day free, paid tiers available
+   - Comprehensive search results
+   - Custom search engine configuration
+   - Direct links: [Google Cloud Console](https://console.cloud.google.com/) | [API Documentation](https://developers.google.com/custom-search/v1/overview)
+
+2. **SerpApi Professional**
+   - Higher rate limits and advanced features
+   - Professional support and SLA
+   - Multiple search engines
+   - Direct links: [Pricing Plans](https://serpapi.com/pricing) | [Dashboard](https://serpapi.com/dashboard)
+
+3. **Bing Search API Professional**
+   - Higher quotas and advanced features
+   - Azure professional tiers
+   - Enterprise support
+   - Direct links: [Azure Pricing](https://azure.microsoft.com/pricing/details/cognitive-services/search-api/) | [Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-web-search/)
+
+### Enterprise Solutions
+1. **Azure Cognitive Search**
+   - Full-featured enterprise search service
+   - AI-powered capabilities
+   - Scalable and secure
+   - Direct links: [Azure Portal](https://portal.azure.com/) | [Create Service](https://portal.azure.com/#create/Microsoft.Search)
+
+2. **Elasticsearch Service**
+   - Managed search and analytics
+   - Real-time indexing and search
+   - Multiple deployment options
+   - Direct links: [Elastic Cloud](https://cloud.elastic.co/) | [AWS OpenSearch](https://aws.amazon.com/opensearch-service/)
+
+3. **Algolia Search**
+   - Fast, reliable search-as-a-service
+   - Powerful APIs and SDKs
+   - Global infrastructure
+   - Direct links: [Sign Up](https://www.algolia.com/users/sign_up) | [Pricing](https://www.algolia.com/pricing/)
+
+### Interactive Setup Guides
+Each API provider includes:
+- **Step-by-step instructions** with screenshots and detailed explanations
+- **Direct links** to registration, documentation, and configuration pages (all open in new tabs with security attributes)
+- **Pricing information** and feature comparisons
+- **Configuration examples** with sample API keys and endpoints
+- **Troubleshooting tips** for common setup issues
 
 ## Processing Status Display
 
@@ -118,6 +269,57 @@ The application includes a comprehensive processing status display that shows:
 **Inputs**: Configuration object for saving, none for retrieval
 **Outputs**: Current configuration object or storage confirmation
 **Error Handling**: JSON parsing errors and localStorage availability checks
+
+### API Guide System Functions (NEW)
+
+#### `showApiGuide(apiType)`
+**Purpose**: Displays interactive API setup guide modal with detailed instructions
+**Inputs**:
+- `apiType` (string): Type of API ('serpapi', 'google', 'bing', 'duckduckgo', 'azure', 'elasticsearch', 'algolia', etc.)
+**Outputs**: Opens modal with step-by-step setup instructions and direct links
+**Error Handling**: Validates API type existence and handles modal element availability
+
+#### `closeApiGuide()`
+**Purpose**: Closes the API guide modal and cleans up event listeners
+**Inputs**: None
+**Outputs**: Hides modal and logs closure event
+**Error Handling**: Validates modal element existence before manipulation
+
+#### `getApiGuideData(apiType)`
+**Purpose**: Retrieves comprehensive setup guide data for specific API provider
+**Inputs**:
+- `apiType` (string): API provider identifier
+**Outputs**: Guide object with title, description, steps, and links, or null if not found
+**Data Structure**:
+```javascript
+{
+  title: string,           // Guide title with emoji and provider name
+  description: string,     // Brief description of the API service
+  steps: [                 // Array of setup steps
+    {
+      title: string,       // Step title (e.g., "1. Create Account")
+      content: string,     // Detailed step instructions
+      links: [             // Array of helpful links
+        {
+          text: string,    // Link display text
+          url: string      // Direct URL (opens in new tab)
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### `generateApiGuideHTML(guideData)`
+**Purpose**: Generates HTML content for API guide modal from guide data
+**Inputs**:
+- `guideData` (Object): Guide data object from getApiGuideData()
+**Outputs**: HTML string with formatted guide content
+**Features**:
+- Responsive layout with glassmorphic styling
+- Security attributes (target="_blank" rel="noopener noreferrer")
+- Error handling for invalid or missing data
+- Accessible markup with proper heading hierarchy
 
 ### Processing State Management
 

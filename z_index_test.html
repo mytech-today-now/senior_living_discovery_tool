@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Index Test - Download Dropdown vs Score Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        
+        .test-container {
+            position: relative;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Simulate glass-card styling */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8.5px);
+            -webkit-backdrop-filter: blur(8.5px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 2rem;
+            margin: 1rem 0;
+            z-index: 9998;
+            position: relative;
+        }
+        
+        /* Simulate download container */
+        .download-container {
+            display: inline-block;
+            position: relative;
+            z-index: 99998;
+        }
+        
+        /* Simulate download dropdown */
+        .download-dropdown {
+            display: none;
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            min-width: 160px;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.3);
+            z-index: 99999;
+            top: 100%;
+            left: 0;
+            overflow: hidden;
+        }
+        
+        .download-dropdown.show {
+            display: block;
+        }
+        
+        .download-dropdown a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .download-dropdown a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .download-btn {
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 12px 24px;
+            color: #333;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Test result styling */
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .test-pass {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .test-fail {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .overlap-test {
+            position: relative;
+            height: 200px;
+            margin: 20px 0;
+        }
+        
+        .score-filter-mock {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 300px;
+            height: 100px;
+            background: rgba(100, 150, 200, 0.8);
+            z-index: 9998;
+            border-radius: 8px;
+            padding: 10px;
+            color: white;
+        }
+        
+        .dropdown-mock {
+            position: absolute;
+            top: 80px;
+            left: 80px;
+            width: 160px;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 99999;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Z-Index Test: Download Dropdown vs Score Filter Container</h1>
+    
+    <div class="test-container">
+        <h2>Test 1: Z-Index Values Verification</h2>
+        <div id="zIndexTest"></div>
+    </div>
+    
+    <div class="test-container">
+        <h2>Test 2: Visual Overlap Test</h2>
+        <p>The white dropdown should appear ABOVE the blue score filter area:</p>
+        <div class="overlap-test">
+            <div class="score-filter-mock">
+                Score Filter Container<br>
+                z-index: 9998
+            </div>
+            <div class="dropdown-mock">
+                Download Dropdown<br>
+                z-index: 99999<br>
+                Should be on top!
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-container">
+        <h2>Test 3: Interactive Test</h2>
+        <p>Click the button to show/hide the dropdown. It should appear above any other elements:</p>
+        
+        <div class="glass-card" id="scoreFilterContainer">
+            <label>Min Score Filter (simulated glass-card)</label>
+            <input type="range" min="0" max="10" value="5">
+            
+            <div class="download-container">
+                <button type="button" onclick="toggleTestDropdown()" class="download-btn">
+                    Download Test ▼
+                </button>
+                <div id="testDownloadDropdown" class="download-dropdown">
+                    <a href="#" onclick="alert('Excel test')">📊 Excel (.xlsx)</a>
+                    <a href="#" onclick="alert('CSV test')">📄 CSV (.csv)</a>
+                    <a href="#" onclick="alert('ODS test')">📋 OpenDocument (.ods)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-container">
+        <h2>Test Results</h2>
+        <div id="testResults"></div>
+    </div>
+
+    <script>
+        'use strict';
+        
+        // Test function to toggle dropdown
+        function toggleTestDropdown() {
+            const dropdown = document.getElementById('testDownloadDropdown');
+            dropdown.classList.toggle('show');
+        }
+        
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.download-btn')) {
+                const dropdown = document.getElementById('testDownloadDropdown');
+                dropdown.classList.remove('show');
+            }
+        }
+        
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            runZIndexTests();
+        });
+        
+        function runZIndexTests() {
+            const results = [];
+            
+            // Test 1: Check z-index values
+            const glassCard = document.querySelector('.glass-card');
+            const downloadContainer = document.querySelector('.download-container');
+            const downloadDropdown = document.querySelector('.download-dropdown');
+            
+            const glassCardZIndex = parseInt(window.getComputedStyle(glassCard).zIndex) || 0;
+            const containerZIndex = parseInt(window.getComputedStyle(downloadContainer).zIndex) || 0;
+            const dropdownZIndex = parseInt(window.getComputedStyle(downloadDropdown).zIndex) || 0;
+            
+            // Test z-index hierarchy
+            if (dropdownZIndex > glassCardZIndex && dropdownZIndex > containerZIndex) {
+                results.push({
+                    test: 'Z-Index Hierarchy',
+                    status: 'PASS',
+                    message: `Dropdown (${dropdownZIndex}) > Glass Card (${glassCardZIndex}) ✓`
+                });
+            } else {
+                results.push({
+                    test: 'Z-Index Hierarchy',
+                    status: 'FAIL',
+                    message: `Dropdown (${dropdownZIndex}) should be > Glass Card (${glassCardZIndex})`
+                });
+            }
+            
+            // Test 2: Check if dropdown has highest z-index
+            if (dropdownZIndex >= 99999) {
+                results.push({
+                    test: 'High Z-Index Value',
+                    status: 'PASS',
+                    message: `Dropdown z-index is ${dropdownZIndex} (≥ 99999) ✓`
+                });
+            } else {
+                results.push({
+                    test: 'High Z-Index Value',
+                    status: 'FAIL',
+                    message: `Dropdown z-index is ${dropdownZIndex}, should be ≥ 99999`
+                });
+            }
+            
+            // Test 3: Check positioning context
+            const containerPosition = window.getComputedStyle(downloadContainer).position;
+            const dropdownPosition = window.getComputedStyle(downloadDropdown).position;
+            
+            if (containerPosition === 'relative' && dropdownPosition === 'absolute') {
+                results.push({
+                    test: 'Positioning Context',
+                    status: 'PASS',
+                    message: `Container: ${containerPosition}, Dropdown: ${dropdownPosition} ✓`
+                });
+            } else {
+                results.push({
+                    test: 'Positioning Context',
+                    status: 'FAIL',
+                    message: `Container: ${containerPosition}, Dropdown: ${dropdownPosition}`
+                });
+            }
+            
+            // Display results
+            displayTestResults(results);
+        }
+        
+        function displayTestResults(results) {
+            const zIndexTestDiv = document.getElementById('zIndexTest');
+            const testResultsDiv = document.getElementById('testResults');
+            
+            let zIndexHtml = '';
+            let resultsHtml = '';
+            
+            results.forEach(result => {
+                const className = result.status === 'PASS' ? 'test-pass' : 'test-fail';
+                const icon = result.status === 'PASS' ? '✅' : '❌';
+                
+                zIndexHtml += `<div class="${className}">${icon} ${result.test}: ${result.message}</div>`;
+                resultsHtml += `<div class="${className}">${icon} ${result.test}: ${result.message}</div>`;
+            });
+            
+            zIndexTestDiv.innerHTML = zIndexHtml;
+            testResultsDiv.innerHTML = resultsHtml;
+            
+            // Log results to console
+            console.log('🧪 Z-Index Test Results:');
+            results.forEach(result => {
+                console.log(`${result.status === 'PASS' ? '✅' : '❌'} ${result.test}: ${result.message}`);
+            });
+        }
+    </script>
+</body>
+</html>

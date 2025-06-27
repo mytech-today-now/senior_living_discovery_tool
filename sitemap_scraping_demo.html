@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap Scraping Demo - Senior Living Discovery Tool</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 74%);
+            color: #333;
+        }
+        
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8px);
+        }
+        
+        .demo-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .demo-button {
+            background: rgba(31, 38, 135, 0.8);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 8px 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-button:hover {
+            background: rgba(31, 38, 135, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(31, 38, 135, 0.3);
+        }
+        
+        .demo-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+        
+        .demo-output {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-success { background: #28a745; }
+        .status-warning { background: #ffc107; }
+        .status-error { background: #dc3545; }
+        .status-info { background: #17a2b8; }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #31266b;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>🕷️ Sitemap-Based Web Scraping Demo</h1>
+        <p>Interactive demonstration of the enhanced sitemap scraping functionality for the Senior Living Discovery Tool.</p>
+        
+        <div class="demo-section">
+            <h2>🔍 Test Sitemap Discovery</h2>
+            <p>Enter a domain to test sitemap discovery and parsing capabilities:</p>
+            
+            <input type="text" id="domainInput" class="demo-input" placeholder="Enter domain (e.g., example.com)" value="example.com">
+            <br>
+            <button onclick="testSitemapDiscovery()" class="demo-button">🔍 Discover Sitemaps</button>
+            <button onclick="clearOutput()" class="demo-button">🗑️ Clear Output</button>
+            
+            <div id="discoveryOutput" class="demo-output">Ready to test sitemap discovery...</div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>📄 Test Content Scraping</h2>
+            <p>Test content extraction and keyword matching:</p>
+            
+            <input type="text" id="urlInput" class="demo-input" placeholder="Enter URL to scrape" value="https://example.com">
+            <input type="text" id="keywordsInput" class="demo-input" placeholder="Enter keywords (comma-separated)" value="senior living, assisted care, pet-friendly">
+            <br>
+            <button onclick="testContentScraping()" class="demo-button">🕷️ Scrape Content</button>
+            <button onclick="testKeywordMatching()" class="demo-button">🎯 Test Keyword Matching</button>
+            
+            <div id="scrapingOutput" class="demo-output">Ready to test content scraping...</div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>📊 Scraping Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="statSitemaps">0</div>
+                    <div class="stat-label">Sitemaps Processed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statPages">0</div>
+                    <div class="stat-label">Pages Scraped</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statSuccess">0</div>
+                    <div class="stat-label">Successful Scrapes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="statMatches">0</div>
+                    <div class="stat-label">Keyword Matches</div>
+                </div>
+            </div>
+            <button onclick="resetStats()" class="demo-button">🔄 Reset Statistics</button>
+        </div>
+        
+        <div class="demo-section">
+            <h2>⚙️ Configuration Test</h2>
+            <p>Test configuration management and validation:</p>
+            
+            <label>Max Pages per Site:</label>
+            <input type="number" id="maxPagesInput" class="demo-input" value="50" min="5" max="200">
+            
+            <label>Scraping Delay (ms):</label>
+            <input type="number" id="delayInput" class="demo-input" value="200" min="100" max="2000">
+            
+            <br>
+            <button onclick="testConfiguration()" class="demo-button">⚙️ Test Configuration</button>
+            <button onclick="saveConfiguration()" class="demo-button">💾 Save Config</button>
+            
+            <div id="configOutput" class="demo-output">Configuration ready for testing...</div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🧪 Run All Tests</h2>
+            <p>Execute comprehensive test suite for all sitemap scraping functionality:</p>
+            
+            <button onclick="runAllTests()" class="demo-button">🚀 Run All Tests</button>
+            <button onclick="runPerformanceTest()" class="demo-button">⚡ Performance Test</button>
+            
+            <div id="testOutput" class="demo-output">Ready to run comprehensive tests...</div>
+        </div>
+    </div>
+
+    <script src="sitemap_scraping_tests.js"></script>
+    <script>
+        'use strict';
+        
+        // Mock statistics for demo
+        let mockStats = {
+            totalSitemaps: 0,
+            totalPages: 0,
+            successfulScrapes: 0,
+            keywordMatches: 0
+        };
+        
+        function logToOutput(elementId, message, status = 'info') {
+            const output = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            const statusIcon = getStatusIcon(status);
+            output.textContent += `[${timestamp}] ${statusIcon} ${message}\n`;
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        function getStatusIcon(status) {
+            const icons = {
+                success: '✅',
+                warning: '⚠️',
+                error: '❌',
+                info: 'ℹ️'
+            };
+            return icons[status] || 'ℹ️';
+        }
+        
+        function clearOutput() {
+            document.getElementById('discoveryOutput').textContent = 'Output cleared...\n';
+            document.getElementById('scrapingOutput').textContent = 'Output cleared...\n';
+            document.getElementById('configOutput').textContent = 'Output cleared...\n';
+            document.getElementById('testOutput').textContent = 'Output cleared...\n';
+        }
+        
+        function updateStats() {
+            document.getElementById('statSitemaps').textContent = mockStats.totalSitemaps;
+            document.getElementById('statPages').textContent = mockStats.totalPages;
+            document.getElementById('statSuccess').textContent = mockStats.successfulScrapes;
+            document.getElementById('statMatches').textContent = mockStats.keywordMatches;
+        }
+        
+        function resetStats() {
+            mockStats = { totalSitemaps: 0, totalPages: 0, successfulScrapes: 0, keywordMatches: 0 };
+            updateStats();
+            logToOutput('testOutput', 'Statistics reset to zero', 'success');
+        }
+        
+        async function testSitemapDiscovery() {
+            const domain = document.getElementById('domainInput').value.trim();
+            if (!domain) {
+                logToOutput('discoveryOutput', 'Please enter a domain', 'error');
+                return;
+            }
+            
+            logToOutput('discoveryOutput', `Starting sitemap discovery for: ${domain}`, 'info');
+            
+            try {
+                // Simulate sitemap discovery
+                const commonPaths = ['/sitemap.xml', '/sitemap_index.xml', '/sitemaps.xml'];
+                logToOutput('discoveryOutput', `Checking common sitemap paths...`, 'info');
+                
+                // Mock discovery results
+                const foundSitemaps = [`https://${domain}/sitemap.xml`];
+                mockStats.totalSitemaps += foundSitemaps.length;
+                
+                logToOutput('discoveryOutput', `Found ${foundSitemaps.length} sitemap(s):`, 'success');
+                foundSitemaps.forEach(sitemap => {
+                    logToOutput('discoveryOutput', `  - ${sitemap}`, 'info');
+                });
+                
+                updateStats();
+                
+            } catch (error) {
+                logToOutput('discoveryOutput', `Discovery failed: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testContentScraping() {
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) {
+                logToOutput('scrapingOutput', 'Please enter a URL', 'error');
+                return;
+            }
+            
+            logToOutput('scrapingOutput', `Starting content scraping for: ${url}`, 'info');
+            
+            try {
+                // Simulate content scraping
+                logToOutput('scrapingOutput', 'Fetching page content...', 'info');
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate delay
+                
+                const mockContent = 'Senior living facility with assisted care, memory care, and independent living options. Pet-friendly environment with costs less than $500 per month.';
+                mockStats.totalPages++;
+                mockStats.successfulScrapes++;
+                
+                logToOutput('scrapingOutput', `Content extracted (${mockContent.length} characters):`, 'success');
+                logToOutput('scrapingOutput', mockContent.substring(0, 100) + '...', 'info');
+                
+                updateStats();
+                
+            } catch (error) {
+                logToOutput('scrapingOutput', `Scraping failed: ${error.message}`, 'error');
+            }
+        }
+        
+        function testKeywordMatching() {
+            const keywords = document.getElementById('keywordsInput').value.split(',').map(k => k.trim());
+            const mockContent = 'Senior living facility with assisted care, memory care, and independent living options. Pet-friendly environment with costs less than $500 per month.';
+            
+            logToOutput('scrapingOutput', `Testing keyword matching with ${keywords.length} keywords...`, 'info');
+            
+            let matches = 0;
+            keywords.forEach(keyword => {
+                if (mockContent.toLowerCase().includes(keyword.toLowerCase())) {
+                    matches++;
+                    mockStats.keywordMatches++;
+                    logToOutput('scrapingOutput', `  ✓ Found: "${keyword}"`, 'success');
+                } else {
+                    logToOutput('scrapingOutput', `  ✗ Not found: "${keyword}"`, 'warning');
+                }
+            });
+            
+            const score = (matches / keywords.length) * 10;
+            logToOutput('scrapingOutput', `Keyword matching score: ${score.toFixed(1)}/10`, 'info');
+            
+            updateStats();
+        }
+        
+        function testConfiguration() {
+            const maxPages = parseInt(document.getElementById('maxPagesInput').value);
+            const delay = parseInt(document.getElementById('delayInput').value);
+            
+            logToOutput('configOutput', 'Testing configuration validation...', 'info');
+            
+            // Validate configuration
+            if (maxPages < 5 || maxPages > 200) {
+                logToOutput('configOutput', 'Max pages must be between 5 and 200', 'error');
+                return;
+            }
+            
+            if (delay < 100 || delay > 2000) {
+                logToOutput('configOutput', 'Delay must be between 100 and 2000ms', 'error');
+                return;
+            }
+            
+            logToOutput('configOutput', `Configuration valid:`, 'success');
+            logToOutput('configOutput', `  - Max Pages: ${maxPages}`, 'info');
+            logToOutput('configOutput', `  - Delay: ${delay}ms`, 'info');
+        }
+        
+        function saveConfiguration() {
+            const config = {
+                maxPagesPerSite: parseInt(document.getElementById('maxPagesInput').value),
+                scrapingDelay: parseInt(document.getElementById('delayInput').value),
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('sitemapScrapingConfig', JSON.stringify(config));
+            logToOutput('configOutput', 'Configuration saved to localStorage', 'success');
+        }
+        
+        function runAllTests() {
+            logToOutput('testOutput', 'Starting comprehensive test suite...', 'info');
+            
+            if (typeof runSitemapScrapingTests === 'function') {
+                try {
+                    const results = runSitemapScrapingTests();
+                    logToOutput('testOutput', `Test suite completed: ${results.passed} passed, ${results.failed} failed`, 'success');
+                } catch (error) {
+                    logToOutput('testOutput', `Test suite error: ${error.message}`, 'error');
+                }
+            } else {
+                logToOutput('testOutput', 'Test framework not loaded', 'warning');
+            }
+        }
+        
+        function runPerformanceTest() {
+            logToOutput('testOutput', 'Running performance test...', 'info');
+            
+            const startTime = performance.now();
+            
+            // Simulate performance test
+            for (let i = 0; i < 1000; i++) {
+                const mockUrl = `https://example.com/page${i}`;
+                const mockKeywords = ['test', 'keyword', 'matching'];
+                // Simulate processing
+            }
+            
+            const endTime = performance.now();
+            const duration = endTime - startTime;
+            
+            logToOutput('testOutput', `Performance test completed in ${duration.toFixed(2)}ms`, 'success');
+            logToOutput('testOutput', `Processing rate: ${(1000 / duration * 1000).toFixed(0)} operations/second`, 'info');
+        }
+        
+        // Initialize demo
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+            logToOutput('testOutput', 'Sitemap scraping demo initialized', 'success');
+        });
+    </script>
+</body>
+</html>

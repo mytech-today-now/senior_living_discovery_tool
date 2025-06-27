@@ -1,0 +1,19 @@
+- For production, add backend service configurations for free and paid search API to perform real web searches.
+- create a configuration section at the bottom, that holds these controls in glassamorphic styles.  Use ******** to obscure API keys.
+- Add a footer to the bottom of the page.  List the tech stack, copyright the page to """myTech.Today""" 2025.
+<a href="https://myTech.Today/" target="_blank">myTech.Today</a>
+<a href="mailto:sales@mytech.today?subject=senior_living_discovery_tool" target="_blank">sales@mytech.today</a>
+Barrington, IL 60010
+<a href="tel:8477674914" target="_blank">(847) 767-4914</a>
+- Expand the Code Review.
+
+
+- Don’t reorder content, remove CSS/HTML, rename identifiers, or adjust CSS values.  
+- Handle edge cases.  
+- Log errors: `[HH:MM:SS AM/PM] <Element> tag #X: <message> at line L, column C`.  
+- Document in README.md and inline comments: functions, arrays, public APIs (inputs/outputs).  
+- Robust error handling with clear fallbacks.  
+- Unit tests/assertions (with simple assertions or a test framework) covering positive, negative, boundary, edge, simulated failures, state transitions, module interactions, performance.  
+- Avoid global state; use IIFEs or modules.  
+- Enable strict mode; use descriptive names.  
+- Preserve HTML structure/styling; drop-in changes only.  

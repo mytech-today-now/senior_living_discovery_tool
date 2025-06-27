@@ -1,0 +1,14 @@
+when scraping the website, look for the sitemap file, and recursively scrape every page of the sitemap for the keywords.
+
+- Expand the Code Review.
+
+
+- Don’t reorder content, remove CSS/HTML, rename identifiers, or adjust CSS values.  
+- Handle edge cases.  
+- Log errors: `[HH:MM:SS AM/PM] <Element> tag #X: <message> at line L, column C`.  
+- Document in README.md and inline comments: functions, arrays, public APIs (inputs/outputs).  
+- Robust error handling with clear fallbacks.  
+- Unit tests/assertions (with simple assertions or a test framework) covering positive, negative, boundary, edge, simulated failures, state transitions, module interactions, performance.  
+- Avoid global state; use IIFEs or modules.  
+- Enable strict mode; use descriptive names.  
+- Preserve HTML structure/styling; drop-in changes only.  
