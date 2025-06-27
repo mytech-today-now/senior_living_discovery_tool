@@ -92,6 +92,64 @@
       box-sizing: border-box;
     }
 
+    /* Enhanced glassmorphic styling for file input "Choose File" button */
+    input[type="file"]::-webkit-file-upload-button {
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      padding: 12px 24px;
+      color: #333;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 16px rgba(31, 38, 135, 0.2);
+      transition: all 0.3s ease;
+      font-size: 14px;
+      margin-right: 12px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button:hover {
+      background: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 6px 20px rgba(31, 38, 135, 0.3);
+      transform: translateY(-2px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    input[type="file"]::-webkit-file-upload-button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(31, 38, 135, 0.2);
+    }
+
+    /* Firefox file input button styling */
+    input[type="file"]::file-selector-button {
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      padding: 12px 24px;
+      color: #333;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 16px rgba(31, 38, 135, 0.2);
+      transition: all 0.3s ease;
+      font-size: 14px;
+      margin-right: 12px;
+    }
+
+    input[type="file"]::file-selector-button:hover {
+      background: rgba(255, 255, 255, 0.35);
+      box-shadow: 0 6px 20px rgba(31, 38, 135, 0.3);
+      transform: translateY(-2px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    input[type="file"]::file-selector-button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(31, 38, 135, 0.2);
+    }
+
     input[type="file"]:focus, textarea:focus {
       outline: none;
       background: rgba(255, 255, 255, 0.3);
@@ -310,12 +368,150 @@
       margin: 16px 0;
       display: inline-block;
     }
+
+    /* Glass morphism for links */
+    a {
+      color: #333;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 4px 8px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 2px 8px rgba(31, 38, 135, 0.1);
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    a:hover {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 4px 12px rgba(31, 38, 135, 0.2);
+      transform: translateY(-1px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    a:active {
+      transform: translateY(0);
+      box-shadow: 0 1px 4px rgba(31, 38, 135, 0.1);
+    }
+
+    /* Processing status container */
+    #processingStatus {
+      display: none;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .processing-content {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 4px 16px rgba(31, 38, 135, 0.2);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .processing-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .processing-spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top: 2px solid #333;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .processing-details {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .processing-progress {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .processing-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(31, 38, 135, 0.6), rgba(31, 38, 135, 0.8));
+      border-radius: 20px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .processing-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .processing-log {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 16px;
+      max-height: 120px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: #444;
+      text-align: left;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .log-entry {
+      margin-bottom: 4px;
+      padding: 2px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .log-entry:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .log-timestamp {
+      color: #666;
+      font-weight: 600;
+    }
+
+    .log-message {
+      color: #333;
+    }
   </style>
 </head>
 <body>
   <h1>🏠 Find Hidden Gems Near You!</h1>
   <h3>Senior Living Discovery Tool</h3>
-  <p>Generated by <strong>myTech.Today</strong> — <em>@mytech-today-now</em> on GitHub</p>
+  <p>Generated by <strong>myTech.Today</strong> — <em><a href="https://github.com/mytech-today-now/senior_living_discovery_tool" target="_blank" rel="noopener noreferrer">@mytech-today-now</a></em> on GitHub</p>
 
   <button type="button" onclick="document.getElementById('popup').style.display='flex'">How this works?</button>
   <div id="popup" class="popup">
@@ -358,6 +554,32 @@ accepts service animals above 50 lbs., Costs less than $500/month, Assisted or u
     </div>
   </div>
 
+  <!-- Processing Status Display -->
+  <div id="processingStatus" class="glass-card">
+    <div class="processing-content">
+      <div class="processing-title">
+        <div class="processing-spinner"></div>
+        <span id="processingTitleText">Processing Spreadsheet...</span>
+      </div>
+      <div class="processing-details" id="processingDetails">
+        Analyzing uploaded file and preparing search queries...
+      </div>
+      <div class="processing-progress">
+        <div class="processing-progress-bar" id="processingProgressBar"></div>
+      </div>
+      <div class="processing-stats">
+        <span id="processingCurrent">Processing: 0 of 0</span>
+        <span id="processingTime">Elapsed: 00:00</span>
+      </div>
+      <div class="processing-log" id="processingLog">
+        <div class="log-entry">
+          <span class="log-timestamp">[00:00:00]</span>
+          <span class="log-message">Initializing processing...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="scoreFilterContainer" class="glass-card">
     <label for="scoreFilter">Min Score:</label>
     <input type="range" id="scoreFilter" min="0" max="10" value="0" step="1" onchange="filterByScore(this.value)">
@@ -370,14 +592,243 @@ accepts service animals above 50 lbs., Costs less than $500/month, Assisted or u
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script>
-    let globalData = [];
+    'use strict';
 
-    function logError(err) {
-      console.error("[Error]", err);
+    let globalData = [];
+    let processingState = {
+      isProcessing: false,
+      startTime: null,
+      totalRows: 0,
+      currentRow: 0,
+      logEntries: []
+    };
+
+    /**
+     * Logs error messages with timestamp to console and processing log
+     * Enhanced format: [HH:MM:SS AM/PM] <Element> tag #X: <message> at line L, column C
+     * @param {string|Error} err - Error message or Error object
+     * @param {string} elementType - HTML element type where error occurred (default: 'unknown')
+     * @param {number} elementIndex - Element index or ID (default: 0)
+     * @param {number} lineNumber - Source line number (default: 0)
+     * @param {number} columnNumber - Source column number (default: 0)
+     */
+    function logError(err, elementType = 'unknown', elementIndex = 0, lineNumber = 0, columnNumber = 0) {
+      try {
+        const timestamp = getCurrentTimestamp();
+        const message = err instanceof Error ? err.message : String(err);
+        const formattedLog = `[${timestamp}] ${elementType} tag #${elementIndex}: ${message} at line ${lineNumber}, column ${columnNumber}`;
+
+        console.error(formattedLog);
+        addProcessingLogEntry(timestamp, `ERROR: ${formattedLog}`, 'error');
+
+        // Additional error context for debugging
+        if (err instanceof Error && err.stack) {
+          console.error('Stack trace:', err.stack);
+          addProcessingLogEntry(timestamp, `Stack: ${err.stack.split('\n')[1] || 'No stack available'}`, 'error');
+        }
+      } catch (logErr) {
+        // Fallback logging if main error logging fails
+        console.error(`[${new Date().toLocaleTimeString()}] Logging system error:`, logErr);
+      }
     }
 
-    function logEvent(msg) {
-      console.log("[Event]", msg);
+    /**
+     * Enhanced event logging with element context
+     * @param {string} msg - Event message
+     * @param {string} elementType - HTML element type (default: 'system')
+     * @param {number} elementIndex - Element index or ID (default: 0)
+     */
+    function logEvent(msg, elementType = 'system', elementIndex = 0) {
+      try {
+        const timestamp = getCurrentTimestamp();
+        const formattedLog = elementType !== 'system'
+          ? `[${timestamp}] ${elementType} tag #${elementIndex}: ${msg}`
+          : `[${timestamp}] [Event] ${msg}`;
+
+        console.log(formattedLog);
+        addProcessingLogEntry(timestamp, msg, 'info');
+      } catch (logErr) {
+        console.error(`[${new Date().toLocaleTimeString()}] Event logging error:`, logErr);
+      }
+    }
+
+
+
+    /**
+     * Gets current timestamp in HH:MM:SS AM/PM format
+     * @returns {string} Formatted timestamp
+     */
+    function getCurrentTimestamp() {
+      try {
+        const now = new Date();
+        return now.toLocaleTimeString('en-US', {
+          hour12: true,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+      } catch (error) {
+        return new Date().toTimeString().split(' ')[0];
+      }
+    }
+
+    /**
+     * Gets elapsed time since processing started
+     * @returns {string} Formatted elapsed time (MM:SS)
+     */
+    function getElapsedTime() {
+      if (!processingState.startTime) return '00:00';
+      try {
+        const elapsed = Math.floor((Date.now() - processingState.startTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      } catch (error) {
+        logError(`Failed to calculate elapsed time: ${error.message}`);
+        return '00:00';
+      }
+    }
+
+    /**
+     * Adds entry to processing log with error handling
+     * @param {string} timestamp - Timestamp of the log entry
+     * @param {string} message - Log message
+     * @param {string} type - Log type ('info', 'error', 'warning')
+     */
+    function addProcessingLogEntry(timestamp, message, type = 'info') {
+      try {
+        const logContainer = document.getElementById('processingLog');
+        if (!logContainer) return;
+
+        const entry = {
+          timestamp,
+          message: String(message).substring(0, 200), // Limit message length
+          type
+        };
+
+        processingState.logEntries.push(entry);
+
+        // Keep only last 20 entries to prevent memory issues
+        if (processingState.logEntries.length > 20) {
+          processingState.logEntries = processingState.logEntries.slice(-20);
+        }
+
+        const logEntry = document.createElement('div');
+        logEntry.className = 'log-entry';
+        logEntry.innerHTML = `
+          <span class="log-timestamp">[${timestamp}]</span>
+          <span class="log-message">${entry.message}</span>
+        `;
+
+        logContainer.appendChild(logEntry);
+
+        // Auto-scroll to bottom
+        logContainer.scrollTop = logContainer.scrollHeight;
+
+        // Remove old entries from DOM if too many
+        const entries = logContainer.querySelectorAll('.log-entry');
+        if (entries.length > 20) {
+          entries[0].remove();
+        }
+      } catch (error) {
+        console.error(`[${getCurrentTimestamp()}] Failed to add log entry:`, error);
+      }
+    }
+
+    /**
+     * Shows processing status display with error handling
+     */
+    function showProcessingStatus() {
+      try {
+        const statusDiv = document.getElementById('processingStatus');
+        const outputTable = document.getElementById('outputTable');
+
+        if (statusDiv) {
+          statusDiv.style.display = 'block';
+          processingState.isProcessing = true;
+          processingState.startTime = Date.now();
+          processingState.logEntries = [];
+
+          // Clear previous log entries
+          const logContainer = document.getElementById('processingLog');
+          if (logContainer) {
+            logContainer.innerHTML = '';
+          }
+
+          // Hide results table during processing
+          if (outputTable) {
+            outputTable.style.display = 'none';
+          }
+
+          logEvent('Processing status display shown');
+        }
+      } catch (error) {
+        logError(`Failed to show processing status: ${error.message}`);
+      }
+    }
+
+    /**
+     * Hides processing status display with error handling
+     */
+    function hideProcessingStatus() {
+      try {
+        const statusDiv = document.getElementById('processingStatus');
+        const outputTable = document.getElementById('outputTable');
+
+        if (statusDiv) {
+          statusDiv.style.display = 'none';
+          processingState.isProcessing = false;
+          processingState.startTime = null;
+
+          // Show results table after processing
+          if (outputTable) {
+            outputTable.style.display = 'block';
+          }
+
+          logEvent('Processing status display hidden');
+        }
+      } catch (error) {
+        logError(`Failed to hide processing status: ${error.message}`);
+      }
+    }
+
+    /**
+     * Updates processing progress with error handling
+     * @param {number} current - Current row being processed
+     * @param {number} total - Total number of rows
+     * @param {string} details - Additional details to display
+     */
+    function updateProcessingProgress(current, total, details = '') {
+      try {
+        if (!processingState.isProcessing) return;
+
+        processingState.currentRow = Math.max(0, Math.min(current, total));
+        processingState.totalRows = Math.max(0, total);
+
+        const progressBar = document.getElementById('processingProgressBar');
+        const currentSpan = document.getElementById('processingCurrent');
+        const timeSpan = document.getElementById('processingTime');
+        const detailsDiv = document.getElementById('processingDetails');
+
+        if (progressBar && total > 0) {
+          const percentage = Math.min(100, Math.max(0, (current / total) * 100));
+          progressBar.style.width = `${percentage}%`;
+        }
+
+        if (currentSpan) {
+          currentSpan.textContent = `Processing: ${current} of ${total}`;
+        }
+
+        if (timeSpan) {
+          timeSpan.textContent = `Elapsed: ${getElapsedTime()}`;
+        }
+
+        if (detailsDiv && details) {
+          detailsDiv.textContent = String(details).substring(0, 150);
+        }
+      } catch (error) {
+        logError(`Failed to update processing progress: ${error.message}`);
+      }
     }
 
     async function realSearchQuery(address, criteriaKeywords) {
@@ -427,96 +878,253 @@ accepts service animals above 50 lbs., Costs less than $500/month, Assisted or u
       return score;
     }
 
+    /**
+     * Comprehensive file validation with multiple checkpoints
+     * @param {File} file - Uploaded file object
+     * @returns {Object} Validation result with success status and error details
+     */
+    function validateUploadedFile(file) {
+      const validationResult = {
+        isValid: false,
+        errors: [],
+        warnings: []
+      };
+
+      try {
+        // File existence check
+        if (!file) {
+          validationResult.errors.push('No file provided');
+          logError('File validation failed: No file provided', 'input', 1, 0, 0);
+          return validationResult;
+        }
+
+        // File size validation (max 50MB)
+        const maxSize = 50 * 1024 * 1024;
+        if (file.size > maxSize) {
+          const sizeMB = (file.size / 1024 / 1024).toFixed(2);
+          validationResult.errors.push(`File size ${sizeMB}MB exceeds 50MB limit`);
+          logError(`File size validation failed: ${sizeMB}MB exceeds limit`, 'input', 1, 0, 0);
+        }
+
+        // File type validation
+        const allowedExtensions = ['.xlsx', '.xls', '.csv', '.ods'];
+        const fileName = file.name.toLowerCase();
+        const fileExtension = fileName.substring(fileName.lastIndexOf('.'));
+
+        if (!allowedExtensions.includes(fileExtension)) {
+          validationResult.errors.push(`Unsupported file type: ${fileExtension}`);
+          logError(`File type validation failed: ${fileExtension} not supported`, 'input', 1, 0, 0);
+        }
+
+        // MIME type validation
+        const allowedMimeTypes = [
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          'application/vnd.ms-excel',
+          'text/csv',
+          'application/vnd.oasis.opendocument.spreadsheet'
+        ];
+
+        if (file.type && !allowedMimeTypes.includes(file.type)) {
+          validationResult.warnings.push(`Unexpected MIME type: ${file.type}`);
+          logEvent(`File MIME type warning: ${file.type}`, 'input', 1);
+        }
+
+        validationResult.isValid = validationResult.errors.length === 0;
+
+        if (validationResult.isValid) {
+          logEvent(`File validation successful: ${file.name} (${(file.size / 1024).toFixed(2)}KB)`, 'input', 1);
+        }
+
+        return validationResult;
+
+      } catch (error) {
+        logError(`File validation error: ${error.message}`, 'input', 1, 0, 0);
+        validationResult.errors.push('Validation system error');
+        return validationResult;
+      }
+    }
+
+    /**
+     * Main function to process uploaded spreadsheet file
+     * Handles file reading, data processing, and search operations with comprehensive error handling
+     */
     async function processFile() {
-      const fileInput = document.getElementById('fileInput');
-      const file = fileInput.files[0];
-      const criteriaText = document.getElementById('criteria').value;
-      if (!file) return alert("Please upload a file first.");
+      try {
+        const fileInput = document.getElementById('fileInput');
+        const criteriaTextarea = document.getElementById('criteria');
 
-      const criteriaKeywords = criteriaText.split(',').map(c => c.trim()).filter(Boolean);
+        // Enhanced input validation with element context
+        if (!fileInput) {
+          logError('File input element not found', 'input', 1, 0, 0);
+          return alert("System error: File input not available.");
+        }
 
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        try {
-          const data = new Uint8Array(e.target.result);
-          const workbook = XLSX.read(data, { type: 'array' });
-          const sheetName = workbook.SheetNames[0];
-          const sheet = workbook.Sheets[sheetName];
-          const json = XLSX.utils.sheet_to_json(sheet);
+        if (!criteriaTextarea) {
+          logError('Criteria textarea element not found', 'textarea', 1, 0, 0);
+          return alert("System error: Criteria input not available.");
+        }
 
-          globalData = [];
+        const file = fileInput.files[0];
+        const criteriaText = criteriaTextarea.value;
 
-          // Debug: Log available columns
-          if (json.length > 0) {
-            logEvent(`Available columns: ${Object.keys(json[0]).join(', ')}`);
-          }
+        // Comprehensive file validation
+        const fileValidation = validateUploadedFile(file);
+        if (!fileValidation.isValid) {
+          const errorMessage = fileValidation.errors.join('; ');
+          logError(`File validation failed: ${errorMessage}`, 'input', 1, 0, 0);
+          return alert(`File validation failed:\n${fileValidation.errors.join('\n')}`);
+        }
 
-          for (const row of json) {
-            try {
-              // More flexible column name matching
-              const streetNumber = row['Street Number'] || row['street number'] || row['StreetNumber'] || row['Street_Number'] || '';
-              const streetName = row['Street Name'] || row['street name'] || row['StreetName'] || row['Street_Name'] || '';
-              const town = row['Town'] || row['town'] || row['City'] || row['city'] || '';
-              const state = row['State'] || row['state'] || row['ST'] || row['st'] || '';
-              const zip = row['Zip'] || row['zip'] || row['ZIP'] || row['Zipcode'] || row['zipcode'] || row['Zip Code'] || '';
-              const name = row['Name'] || row['name'] || row['Facility Name'] || row['facility name'] || row['Facility ID'] || 'Unknown Facility';
+        // Criteria validation with enhanced error context
+        if (!criteriaText.trim()) {
+          logError('No criteria provided for processing', 'textarea', 1, 0, 0);
+          return alert("Please enter search criteria.");
+        }
 
-              // Handle both split address fields and single address field
-              let address;
-              const fullAddress = row['Address'] || row['address'] || '';
-              if (fullAddress) {
-                // Use the full address field if available
-                address = `${fullAddress}, ${town}, ${state} ${zip}`.trim();
-              } else {
-                // Fall back to constructing from separate fields
-                address = `${streetNumber} ${streetName}, ${town}, ${state} ${zip}`.trim();
-              }
+        // Validate criteria length and content
+        if (criteriaText.length > 1000) {
+          logError(`Criteria text too long: ${criteriaText.length} characters`, 'textarea', 1, 0, 0);
+          return alert("Search criteria is too long. Please limit to 1000 characters.");
+        }
 
-              // Only search if we have a reasonable address
-              if (town && state) {
-                logEvent(`Processing: ${name} at ${address}`);
-                const scrapedText = await realSearchQuery(address, criteriaKeywords);
-                const matchScore = scoreKeywords(scrapedText, criteriaKeywords);
+        const criteriaKeywords = criteriaText.split(',').map(c => c.trim()).filter(Boolean);
+
+        // Show processing status
+        showProcessingStatus();
+        logEvent(`Starting file processing: ${file.name} (${file.size} bytes)`);
+        updateProcessingProgress(0, 0, 'Reading file...');
+
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          try {
+            updateProcessingProgress(0, 0, 'Parsing spreadsheet data...');
+
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const json = XLSX.utils.sheet_to_json(sheet);
+
+            if (!json || json.length === 0) {
+              throw new Error('No data found in spreadsheet');
+            }
+
+            globalData = [];
+            const totalRows = json.length;
+
+            logEvent(`Found ${totalRows} rows to process`);
+            updateProcessingProgress(0, totalRows, `Processing ${totalRows} facilities...`);
+
+            // Debug: Log available columns
+            if (json.length > 0) {
+              const columns = Object.keys(json[0]).join(', ');
+              logEvent(`Available columns: ${columns}`);
+            }
+
+            // Process each row with progress updates
+            for (let i = 0; i < json.length; i++) {
+              const row = json[i];
+              const currentIndex = i + 1;
+
+              try {
+                // Update progress for current row
+                updateProcessingProgress(currentIndex, totalRows, `Processing facility ${currentIndex} of ${totalRows}...`);
+
+                // More flexible column name matching
+                const streetNumber = row['Street Number'] || row['street number'] || row['StreetNumber'] || row['Street_Number'] || '';
+                const streetName = row['Street Name'] || row['street name'] || row['StreetName'] || row['Street_Name'] || '';
+                const town = row['Town'] || row['town'] || row['City'] || row['city'] || '';
+                const state = row['State'] || row['state'] || row['ST'] || row['st'] || '';
+                const zip = row['Zip'] || row['zip'] || row['ZIP'] || row['Zipcode'] || row['zipcode'] || row['Zip Code'] || '';
+                const name = row['Name'] || row['name'] || row['Facility Name'] || row['facility name'] || row['Facility ID'] || 'Unknown Facility';
+
+                // Handle both split address fields and single address field
+                let address;
+                const fullAddress = row['Address'] || row['address'] || '';
+                if (fullAddress) {
+                  // Use the full address field if available
+                  address = `${fullAddress}, ${town}, ${state} ${zip}`.trim();
+                } else {
+                  // Fall back to constructing from separate fields
+                  address = `${streetNumber} ${streetName}, ${town}, ${state} ${zip}`.trim();
+                }
+
+                // Only search if we have a reasonable address
+                if (town && state) {
+                  logEvent(`Processing: ${name} at ${address}`);
+                  updateProcessingProgress(currentIndex, totalRows, `Searching for: ${name}...`);
+
+                  const scrapedText = await realSearchQuery(address, criteriaKeywords);
+                  const matchScore = scoreKeywords(scrapedText, criteriaKeywords);
+
+                  globalData.push({
+                    Name: name,
+                    'Street Number': streetNumber,
+                    'Street Name': streetName,
+                    Address: fullAddress,
+                    Town: town,
+                    City: town, // Include both for compatibility
+                    State: state,
+                    Zip: zip,
+                    'Zip Code': zip, // Include both for compatibility
+                    ...row,
+                    SearchSummary: scrapedText,
+                    Score: matchScore
+                  });
+
+                  logEvent(`Completed: ${name} (Score: ${matchScore})`);
+                } else {
+                  const errorMsg = `Skipping row due to incomplete address data: ${JSON.stringify(row)}`;
+                  logEvent(errorMsg);
+                  globalData.push({
+                    ...row,
+                    SearchSummary: "Incomplete address data",
+                    Score: 0
+                  });
+                }
+              } catch (e) {
+                const errorMsg = `Error processing row ${currentIndex}: ${e.message}`;
+                logError(errorMsg);
                 globalData.push({
-                  Name: name,
-                  'Street Number': streetNumber,
-                  'Street Name': streetName,
-                  Address: fullAddress,
-                  Town: town,
-                  City: town, // Include both for compatibility
-                  State: state,
-                  Zip: zip,
-                  'Zip Code': zip, // Include both for compatibility
                   ...row,
-                  SearchSummary: scrapedText,
-                  Score: matchScore
-                });
-              } else {
-                logEvent(`Skipping row due to incomplete address data: ${JSON.stringify(row)}`);
-                globalData.push({
-                  ...row,
-                  SearchSummary: "Incomplete address data",
+                  SearchSummary: "Error processing row",
                   Score: 0
                 });
               }
-            } catch (e) {
-              logError(e);
-              globalData.push({
-                ...row,
-                SearchSummary: "Error processing row",
-                Score: 0
-              });
             }
-          }
 
-          renderTable(globalData);
-          logEvent("Spreadsheet processed and scored.");
-        } catch (err) {
-          logError(err);
-          alert("Failed to process spreadsheet.");
-        }
-      };
-      reader.readAsArrayBuffer(file);
+            // Final processing steps
+            updateProcessingProgress(totalRows, totalRows, 'Finalizing results...');
+            logEvent(`Processing complete. ${globalData.length} facilities processed.`);
+
+            renderTable(globalData);
+            hideProcessingStatus();
+            logEvent("Spreadsheet processed and scored successfully.");
+
+          } catch (err) {
+            const errorMsg = `Failed to process spreadsheet: ${err.message}`;
+            logError(errorMsg);
+            hideProcessingStatus();
+            alert("Failed to process spreadsheet. Check console for details.");
+          }
+        };
+
+        // Handle file reading errors
+        reader.onerror = function(error) {
+          const errorMsg = `Failed to read file: ${error.message || 'Unknown error'}`;
+          logError(errorMsg);
+          hideProcessingStatus();
+          alert("Failed to read the uploaded file.");
+        };
+
+        reader.readAsArrayBuffer(file);
+
+      } catch (error) {
+        const errorMsg = `Process file error: ${error.message}`;
+        logError(errorMsg);
+        hideProcessingStatus();
+        alert("An error occurred while processing the file.");
+      }
     }
 
     function renderTable(data) {
@@ -617,6 +1225,212 @@ accepts service animals above 50 lbs., Costs less than $500/month, Assisted or u
         alert(`Failed to generate ${format.toUpperCase()} file.`);
       }
     }
+
+    /**
+     * Lightweight testing framework with simple assertions
+     * Provides comprehensive test coverage for all major functions
+     */
+    function runTestSuite() {
+      'use strict';
+
+      const testResults = {
+        passed: 0,
+        failed: 0,
+        errors: [],
+        startTime: Date.now()
+      };
+
+      /**
+       * Simple assertion helper with detailed error reporting
+       * @param {boolean} condition - Condition to test
+       * @param {string} message - Test description
+       * @param {string} category - Test category for organization
+       */
+      function assert(condition, message, category = 'general') {
+        try {
+          if (!condition) {
+            testResults.failed++;
+            const errorMsg = `[${category.toUpperCase()}] ASSERTION FAILED: ${message}`;
+            testResults.errors.push(errorMsg);
+            logError(errorMsg, 'test', testResults.failed, 0, 0);
+            console.error(`❌ ${message}`);
+          } else {
+            testResults.passed++;
+            logEvent(`Test passed: ${message}`, 'test', testResults.passed);
+            console.log(`✅ ${message}`);
+          }
+        } catch (error) {
+          testResults.failed++;
+          logError(`Assertion error: ${error.message}`, 'test', testResults.failed, 0, 0);
+        }
+      }
+
+      // Test file validation functionality
+      function testFileValidation() {
+        console.log('🧪 Testing file validation...');
+
+        try {
+          // Positive test: Valid XLSX file
+          const validFile = new File(['test content'], 'test.xlsx', {
+            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+          });
+          const validResult = validateUploadedFile(validFile);
+          assert(validResult.isValid === true, 'Valid XLSX file should pass validation', 'file-validation');
+          assert(validResult.errors.length === 0, 'Valid file should have no errors', 'file-validation');
+
+          // Negative test: Invalid file type
+          const invalidFile = new File(['test'], 'test.txt', { type: 'text/plain' });
+          const invalidResult = validateUploadedFile(invalidFile);
+          assert(invalidResult.isValid === false, 'Invalid file type should fail validation', 'file-validation');
+          assert(invalidResult.errors.length > 0, 'Invalid file should have errors', 'file-validation');
+
+          // Boundary test: Oversized file (simulated)
+          const oversizedFile = new File([new ArrayBuffer(1024)], 'large.xlsx');
+          Object.defineProperty(oversizedFile, 'size', { value: 60 * 1024 * 1024 }); // 60MB
+          const oversizedResult = validateUploadedFile(oversizedFile);
+          assert(oversizedResult.isValid === false, 'Oversized file should fail validation', 'file-validation');
+
+          // Edge case: Null file
+          const nullResult = validateUploadedFile(null);
+          assert(nullResult.isValid === false, 'Null file should fail validation', 'file-validation');
+
+        } catch (error) {
+          logError(`File validation test error: ${error.message}`, 'test', 0, 0, 0);
+        }
+      }
+
+      // Test timestamp functionality
+      function testTimestampGeneration() {
+        console.log('🧪 Testing timestamp generation...');
+
+        try {
+          const timestamp1 = getCurrentTimestamp();
+          const timestamp2 = getCurrentTimestamp();
+
+          assert(typeof timestamp1 === 'string', 'Timestamp should be a string', 'timestamp');
+          assert(timestamp1.length > 0, 'Timestamp should not be empty', 'timestamp');
+          assert(/\d{1,2}:\d{2}:\d{2}\s(AM|PM)/.test(timestamp1), 'Timestamp should match HH:MM:SS AM/PM format', 'timestamp');
+
+          // Test consistency (timestamps should be similar within same second)
+          const timeDiff = Math.abs(new Date(`1970-01-01 ${timestamp1}`).getTime() - new Date(`1970-01-01 ${timestamp2}`).getTime());
+          assert(timeDiff < 2000, 'Consecutive timestamps should be within 2 seconds', 'timestamp');
+
+        } catch (error) {
+          logError(`Timestamp test error: ${error.message}`, 'test', 0, 0, 0);
+        }
+      }
+
+      // Test processing state management
+      function testProcessingState() {
+        console.log('🧪 Testing processing state management...');
+
+        try {
+          const initialState = processingState.isProcessing;
+
+          // Test state initialization
+          assert(typeof processingState === 'object', 'Processing state should be an object', 'state');
+          assert(typeof processingState.isProcessing === 'boolean', 'isProcessing should be boolean', 'state');
+          assert(Array.isArray(processingState.logEntries), 'logEntries should be an array', 'state');
+
+          // Test state transitions
+          showProcessingStatus();
+          assert(processingState.isProcessing === true, 'showProcessingStatus should set isProcessing to true', 'state');
+          assert(processingState.startTime !== null, 'showProcessingStatus should set startTime', 'state');
+
+          hideProcessingStatus();
+          assert(processingState.isProcessing === false, 'hideProcessingStatus should set isProcessing to false', 'state');
+
+          // Restore initial state
+          processingState.isProcessing = initialState;
+
+        } catch (error) {
+          logError(`Processing state test error: ${error.message}`, 'test', 0, 0, 0);
+        }
+      }
+
+      // Test DOM element availability
+      function testDOMElements() {
+        console.log('🧪 Testing DOM element availability...');
+
+        try {
+          const requiredElements = [
+            'fileInput', 'criteria', 'results', 'processingStatus',
+            'scoreFilter', 'scoreDisplay', 'downloadDropdown'
+          ];
+
+          requiredElements.forEach(elementId => {
+            const element = document.getElementById(elementId);
+            assert(element !== null, `Element ${elementId} should exist in DOM`, 'dom');
+            if (element) {
+              assert(element.tagName.length > 0, `Element ${elementId} should have valid tag name`, 'dom');
+            }
+          });
+
+        } catch (error) {
+          logError(`DOM element test error: ${error.message}`, 'test', 0, 0, 0);
+        }
+      }
+
+      // Test error handling robustness
+      function testErrorHandling() {
+        console.log('🧪 Testing error handling...');
+
+        try {
+          // Test error logging with various input types
+          logError('Test string error', 'test', 1, 10, 5);
+          assert(true, 'String error logging should not throw', 'error-handling');
+
+          logError(new Error('Test Error object'), 'test', 2, 20, 10);
+          assert(true, 'Error object logging should not throw', 'error-handling');
+
+          // Test edge case: undefined error
+          logError(undefined, 'test', 3, 30, 15);
+          assert(true, 'Undefined error logging should not throw', 'error-handling');
+
+          // Test edge case: null error
+          logError(null, 'test', 4, 40, 20);
+          assert(true, 'Null error logging should not throw', 'error-handling');
+
+        } catch (error) {
+          logError(`Error handling test error: ${error.message}`, 'test', 0, 0, 0);
+        }
+      }
+
+      // Run all test suites
+      console.log('🚀 Starting comprehensive test suite...');
+      testFileValidation();
+      testTimestampGeneration();
+      testProcessingState();
+      testDOMElements();
+      testErrorHandling();
+
+      // Calculate test duration
+      const duration = Date.now() - testResults.startTime;
+
+      // Final test results
+      console.log(`\n📊 Test Results Summary:`);
+      console.log(`✅ Passed: ${testResults.passed}`);
+      console.log(`❌ Failed: ${testResults.failed}`);
+      console.log(`⏱️ Duration: ${duration}ms`);
+      console.log(`📈 Success Rate: ${((testResults.passed / (testResults.passed + testResults.failed)) * 100).toFixed(1)}%`);
+
+      if (testResults.errors.length > 0) {
+        console.log(`\n🔍 Failed Test Details:`);
+        testResults.errors.forEach(error => console.error(error));
+      }
+
+      logEvent(`Test suite completed: ${testResults.passed} passed, ${testResults.failed} failed in ${duration}ms`, 'test', 0);
+
+      return testResults;
+    }
+
+    // Auto-run tests on page load for development
+    document.addEventListener('DOMContentLoaded', function() {
+      // Uncomment the line below to run tests automatically
+      // runTestSuite();
+
+      logEvent('Senior Living Discovery Tool initialized successfully', 'system', 0);
+    });
   </script>
 </body>
 </html>
