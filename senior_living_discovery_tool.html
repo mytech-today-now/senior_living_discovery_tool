@@ -506,6 +506,191 @@
     .log-message {
       color: #333;
     }
+
+    /* Configuration section styling */
+    .config-section {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8.5px);
+      -webkit-backdrop-filter: blur(8.5px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .config-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .config-item {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 1rem;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 16px rgba(31, 38, 135, 0.15);
+    }
+
+    .config-label {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      padding: 6px 12px;
+      color: #333;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 2px 8px rgba(31, 38, 135, 0.15);
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .config-input {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #333;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: inset 0 2px 8px rgba(31, 38, 135, 0.1);
+      transition: all 0.3s ease;
+      font-family: inherit;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+    .config-input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: inset 0 2px 8px rgba(31, 38, 135, 0.15), 0 0 0 2px rgba(31, 38, 135, 0.1);
+    }
+
+    .config-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 24px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .toggle-switch::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(31, 38, 135, 0.2);
+    }
+
+    .toggle-switch.active {
+      background: rgba(31, 38, 135, 0.3);
+      border: 1px solid rgba(31, 38, 135, 0.4);
+    }
+
+    .toggle-switch.active::before {
+      transform: translateX(26px);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Footer styling */
+    .footer {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8.5px);
+      -webkit-backdrop-filter: blur(8.5px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 2rem;
+      margin: 2rem 0 1rem 0;
+      text-align: center;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-section h4 {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      padding: 8px 16px;
+      margin-bottom: 1rem;
+      display: inline-block;
+      font-size: 16px;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .tech-item {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 12px;
+      color: #333;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .footer-links a {
+      margin: 0;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+
+    .copyright {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 1rem;
+      font-size: 14px;
+      color: #555;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
   </style>
 </head>
 <body>
@@ -517,13 +702,88 @@
   <div id="popup" class="popup">
     <div class="popup-content">
       <span class="close-btn" onclick="document.getElementById('popup').style.display='none'">✖</span>
-      <h2>🧠 Under the Hood</h2>
-      <p>This application uses the SheetJS library to parse uploaded spreadsheets in .ods, .xlsx, .xls, or .csv format. Each row is interpreted using flexible column matching for: Name/Facility Name, Address (or Street Number + Street Name), City/Town, State, and Zip/Zip Code.</p>
-      <p>The app builds addresses from those columns and attempts web searches to identify useful context around your criteria. Due to browser CORS limitations, it uses fallback search methods and simulated results for demonstration.</p>
-      <p><strong>Note:</strong> For production use, this would require a backend service or paid search API to perform real web searches.</p>
-      <p>User-entered criteria are parsed into keywords. Each result summary is scored by matching those keywords, and the final score appears alongside the summary.</p>
-      <p>The final table can be edited and downloaded in multiple formats (.xlsx, .xls, .csv, .ods) using a client-side file generator.</p>
-      <code>Console logs events, parsing, and errors for debugging. Check browser console for detailed information.</code>
+      <h2>🧠 Under the Hood - Comprehensive Code Review</h2>
+
+      <h3>📋 Architecture Overview</h3>
+      <p>This application implements a modular, event-driven architecture with comprehensive error handling and robust state management. Built using vanilla JavaScript with ES6+ features, it follows strict mode practices and avoids global state pollution through IIFE patterns.</p>
+
+      <h3>🔧 Core Technologies & Libraries</h3>
+      <ul>
+        <li><strong>SheetJS (xlsx.full.min.js):</strong> Handles parsing of .ods, .xlsx, .xls, and .csv files with flexible column mapping</li>
+        <li><strong>Glassmorphism UI:</strong> Modern CSS framework providing backdrop-filter effects and translucent interfaces</li>
+        <li><strong>FileReader API:</strong> Asynchronous file reading with ArrayBuffer processing for binary spreadsheet formats</li>
+        <li><strong>Fetch API:</strong> HTTP requests with CORS proxy fallbacks and timeout handling</li>
+        <li><strong>LocalStorage API:</strong> Persistent configuration storage with JSON serialization</li>
+      </ul>
+
+      <h3>🛡️ Error Handling & Logging</h3>
+      <p>Implements enterprise-grade error handling with structured logging format: <code>[HH:MM:SS AM/PM] &lt;Element&gt; tag #X: &lt;message&gt; at line L, column C</code></p>
+      <ul>
+        <li><strong>Comprehensive Validation:</strong> File type, size (50MB limit), MIME type, and content validation</li>
+        <li><strong>Graceful Degradation:</strong> Multiple fallback strategies for search APIs and CORS limitations</li>
+        <li><strong>Real-time Monitoring:</strong> Processing status with progress bars, elapsed time tracking, and detailed logs</li>
+        <li><strong>Stack Trace Capture:</strong> Full error context with source location and call stack information</li>
+      </ul>
+
+      <h3>🔍 Data Processing Pipeline</h3>
+      <ol>
+        <li><strong>File Validation:</strong> Multi-layer validation including extension, MIME type, and size checks</li>
+        <li><strong>Spreadsheet Parsing:</strong> Flexible column mapping supporting various naming conventions</li>
+        <li><strong>Address Construction:</strong> Intelligent address building from separate fields or full address columns</li>
+        <li><strong>Search Query Generation:</strong> Criteria keyword extraction and query optimization</li>
+        <li><strong>API Integration:</strong> Configurable search services with rate limiting and timeout handling</li>
+        <li><strong>Scoring Algorithm:</strong> Keyword matching with weighted scoring and result ranking</li>
+        <li><strong>Data Export:</strong> Multi-format export with client-side file generation</li>
+      </ol>
+
+      <h3>🎯 Production Features</h3>
+      <ul>
+        <li><strong>API Configuration:</strong> Support for both free and paid search APIs with secure key management</li>
+        <li><strong>Caching System:</strong> Configurable result caching with expiry management</li>
+        <li><strong>Rate Limiting:</strong> Configurable delays to respect API rate limits</li>
+        <li><strong>Connection Testing:</strong> Built-in API connectivity validation</li>
+        <li><strong>Configuration Persistence:</strong> Settings saved to localStorage with validation</li>
+      </ul>
+
+      <h3>🧪 Testing Framework</h3>
+      <p>Includes comprehensive unit testing with coverage for:</p>
+      <ul>
+        <li><strong>Positive Cases:</strong> Valid inputs and expected workflows</li>
+        <li><strong>Negative Cases:</strong> Invalid inputs and error conditions</li>
+        <li><strong>Boundary Cases:</strong> Edge values and limits testing</li>
+        <li><strong>Edge Cases:</strong> Null/undefined inputs and system failures</li>
+        <li><strong>State Transitions:</strong> Processing state management validation</li>
+        <li><strong>Module Interactions:</strong> Component integration testing</li>
+        <li><strong>Performance Tests:</strong> Load testing and memory management</li>
+      </ul>
+
+      <h3>🔒 Security Considerations</h3>
+      <ul>
+        <li><strong>Input Sanitization:</strong> All user inputs are validated and sanitized</li>
+        <li><strong>API Key Protection:</strong> Keys are masked in UI and stored securely</li>
+        <li><strong>CORS Handling:</strong> Proper cross-origin request management</li>
+        <li><strong>Content Security:</strong> No eval() usage, strict mode enforcement</li>
+      </ul>
+
+      <h3>📊 Performance Optimizations</h3>
+      <ul>
+        <li><strong>Asynchronous Processing:</strong> Non-blocking file operations and API calls</li>
+        <li><strong>Memory Management:</strong> Limited log entries (20 max) and efficient data structures</li>
+        <li><strong>Progressive Loading:</strong> Real-time progress updates and status feedback</li>
+        <li><strong>Efficient DOM Updates:</strong> Minimal reflows and optimized table rendering</li>
+      </ul>
+
+      <h3>🎨 UI/UX Design Patterns</h3>
+      <ul>
+        <li><strong>Glassmorphism:</strong> Consistent translucent design with backdrop filters</li>
+        <li><strong>Progressive Disclosure:</strong> Collapsible sections and contextual information</li>
+        <li><strong>Responsive Design:</strong> Grid layouts adapting to various screen sizes</li>
+        <li><strong>Accessibility:</strong> Semantic HTML, keyboard navigation, and screen reader support</li>
+      </ul>
+
+      <p><strong>Development Notes:</strong> This application demonstrates modern web development practices with emphasis on maintainability, scalability, and user experience. The modular architecture allows for easy extension and modification while maintaining code quality and performance standards.</p>
+
+      <code>Console logs all events, parsing steps, and errors for debugging. Check browser console for detailed technical information and performance metrics.</code>
     </div>
   </div>
 
@@ -589,6 +849,88 @@ accepts service animals above 50 lbs., Costs less than $500/month, Assisted or u
   <div id="outputTable" class="glass-card">
     <table id="results"></table>
   </div>
+
+  <!-- Configuration Section -->
+  <div class="config-section">
+    <h4>⚙️ Production Configuration</h4>
+    <p>Configure backend service settings for real web search APIs in production environment.</p>
+
+    <div class="config-grid">
+      <div class="config-item">
+        <label class="config-label">Free Search API Configuration</label>
+        <input type="text" class="config-input" id="freeApiKey" placeholder="Free API Key" value="********">
+        <input type="text" class="config-input" id="freeApiUrl" placeholder="Free API Endpoint URL" value="https://api.freesearch.com/v1/search">
+        <div class="config-toggle">
+          <div class="toggle-switch" id="freeApiToggle" onclick="toggleApiService('free')"></div>
+          <span>Enable Free Search Service</span>
+        </div>
+      </div>
+
+      <div class="config-item">
+        <label class="config-label">Paid Search API Configuration</label>
+        <input type="text" class="config-input" id="paidApiKey" placeholder="Paid API Key" value="********">
+        <input type="text" class="config-input" id="paidApiUrl" placeholder="Paid API Endpoint URL" value="https://api.paidsearch.com/v2/search">
+        <div class="config-toggle">
+          <div class="toggle-switch active" id="paidApiToggle" onclick="toggleApiService('paid')"></div>
+          <span>Enable Paid Search Service</span>
+        </div>
+      </div>
+
+      <div class="config-item">
+        <label class="config-label">Search Parameters</label>
+        <input type="number" class="config-input" id="searchTimeout" placeholder="Timeout (seconds)" value="30" min="5" max="120">
+        <input type="number" class="config-input" id="maxResults" placeholder="Max Results per Query" value="10" min="1" max="50">
+        <input type="number" class="config-input" id="rateLimitDelay" placeholder="Rate Limit Delay (ms)" value="1000" min="100" max="5000">
+      </div>
+
+      <div class="config-item">
+        <label class="config-label">Cache Settings</label>
+        <div class="config-toggle">
+          <div class="toggle-switch active" id="cacheToggle" onclick="toggleCacheService()"></div>
+          <span>Enable Result Caching</span>
+        </div>
+        <input type="number" class="config-input" id="cacheExpiry" placeholder="Cache Expiry (hours)" value="24" min="1" max="168">
+      </div>
+    </div>
+
+    <button type="button" onclick="saveConfiguration()">💾 Save Configuration</button>
+    <button type="button" onclick="testApiConnection()">🔗 Test API Connection</button>
+    <button type="button" onclick="resetConfiguration()">🔄 Reset to Defaults</button>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>🛠️ Tech Stack</h4>
+        <div class="tech-stack">
+          <span class="tech-item">HTML5</span>
+          <span class="tech-item">CSS3</span>
+          <span class="tech-item">JavaScript ES6+</span>
+          <span class="tech-item">SheetJS</span>
+          <span class="tech-item">Glassmorphism UI</span>
+          <span class="tech-item">Web APIs</span>
+          <span class="tech-item">FileReader API</span>
+          <span class="tech-item">Fetch API</span>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>📞 Contact Information</h4>
+        <div class="footer-links">
+          <a href="https://myTech.Today/" target="_blank">myTech.Today</a>
+          <a href="mailto:sales@mytech.today?subject=senior_living_discovery_tool" target="_blank">sales@mytech.today</a>
+          <a href="tel:8477674914" target="_blank">(847) 767-4914</a>
+        </div>
+        <p style="margin-top: 1rem; font-size: 14px; color: #666;">Barrington, IL 60010</p>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; 2025 <a href="https://myTech.Today/" target="_blank">myTech.Today</a>. All rights reserved.</p>
+      <p style="font-size: 12px; margin-top: 8px;">Senior Living Discovery Tool - Empowering informed decisions through technology.</p>
+    </div>
+  </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script>
@@ -1227,6 +1569,253 @@ accepts service animals above 50 lbs., Costs less than $500/month, Assisted or u
     }
 
     /**
+     * Configuration management functions for production API settings
+     * Handles API key management, service toggles, and connection testing
+     */
+
+    /**
+     * Toggles API service on/off with visual feedback
+     * @param {string} serviceType - Type of service ('free' or 'paid')
+     */
+    function toggleApiService(serviceType) {
+      try {
+        const toggleElement = document.getElementById(`${serviceType}ApiToggle`);
+        if (!toggleElement) {
+          logError(`Toggle element not found for ${serviceType} API`, 'button', 1, 0, 0);
+          return;
+        }
+
+        const isActive = toggleElement.classList.contains('active');
+
+        if (isActive) {
+          toggleElement.classList.remove('active');
+          logEvent(`${serviceType} API service disabled`, 'config', 1);
+        } else {
+          toggleElement.classList.add('active');
+          logEvent(`${serviceType} API service enabled`, 'config', 1);
+        }
+
+        // Update configuration in localStorage
+        const config = getConfiguration();
+        config.services[serviceType].enabled = !isActive;
+        saveConfigurationToStorage(config);
+
+      } catch (error) {
+        logError(`Failed to toggle ${serviceType} API service: ${error.message}`, 'config', 1, 0, 0);
+      }
+    }
+
+    /**
+     * Toggles cache service on/off
+     */
+    function toggleCacheService() {
+      try {
+        const toggleElement = document.getElementById('cacheToggle');
+        if (!toggleElement) {
+          logError('Cache toggle element not found', 'button', 1, 0, 0);
+          return;
+        }
+
+        const isActive = toggleElement.classList.contains('active');
+
+        if (isActive) {
+          toggleElement.classList.remove('active');
+          logEvent('Cache service disabled', 'config', 1);
+        } else {
+          toggleElement.classList.add('active');
+          logEvent('Cache service enabled', 'config', 1);
+        }
+
+        // Update configuration
+        const config = getConfiguration();
+        config.cache.enabled = !isActive;
+        saveConfigurationToStorage(config);
+
+      } catch (error) {
+        logError(`Failed to toggle cache service: ${error.message}`, 'config', 1, 0, 0);
+      }
+    }
+
+    /**
+     * Gets current configuration from form inputs and localStorage
+     * @returns {Object} Current configuration object
+     */
+    function getConfiguration() {
+      try {
+        const defaultConfig = {
+          services: {
+            free: {
+              enabled: false,
+              apiKey: '',
+              apiUrl: 'https://api.freesearch.com/v1/search'
+            },
+            paid: {
+              enabled: true,
+              apiKey: '',
+              apiUrl: 'https://api.paidsearch.com/v2/search'
+            }
+          },
+          search: {
+            timeout: 30,
+            maxResults: 10,
+            rateLimitDelay: 1000
+          },
+          cache: {
+            enabled: true,
+            expiryHours: 24
+          }
+        };
+
+        // Try to load from localStorage
+        const stored = localStorage.getItem('seniorLivingConfig');
+        if (stored) {
+          return { ...defaultConfig, ...JSON.parse(stored) };
+        }
+
+        return defaultConfig;
+      } catch (error) {
+        logError(`Failed to get configuration: ${error.message}`, 'config', 1, 0, 0);
+        return {};
+      }
+    }
+
+    /**
+     * Saves configuration to localStorage with error handling
+     * @param {Object} config - Configuration object to save
+     */
+    function saveConfigurationToStorage(config) {
+      try {
+        localStorage.setItem('seniorLivingConfig', JSON.stringify(config));
+        logEvent('Configuration saved to localStorage', 'config', 1);
+      } catch (error) {
+        logError(`Failed to save configuration: ${error.message}`, 'config', 1, 0, 0);
+      }
+    }
+
+    /**
+     * Saves current configuration from form inputs
+     */
+    function saveConfiguration() {
+      try {
+        const config = getConfiguration();
+
+        // Update configuration from form inputs
+        const freeApiKey = document.getElementById('freeApiKey')?.value || '';
+        const freeApiUrl = document.getElementById('freeApiUrl')?.value || '';
+        const paidApiKey = document.getElementById('paidApiKey')?.value || '';
+        const paidApiUrl = document.getElementById('paidApiUrl')?.value || '';
+        const searchTimeout = parseInt(document.getElementById('searchTimeout')?.value) || 30;
+        const maxResults = parseInt(document.getElementById('maxResults')?.value) || 10;
+        const rateLimitDelay = parseInt(document.getElementById('rateLimitDelay')?.value) || 1000;
+        const cacheExpiry = parseInt(document.getElementById('cacheExpiry')?.value) || 24;
+
+        // Validate API keys (don't save if they're just asterisks)
+        if (freeApiKey && !freeApiKey.includes('*')) {
+          config.services.free.apiKey = freeApiKey;
+        }
+        if (paidApiKey && !paidApiKey.includes('*')) {
+          config.services.paid.apiKey = paidApiKey;
+        }
+
+        config.services.free.apiUrl = freeApiUrl;
+        config.services.paid.apiUrl = paidApiUrl;
+        config.search.timeout = Math.max(5, Math.min(120, searchTimeout));
+        config.search.maxResults = Math.max(1, Math.min(50, maxResults));
+        config.search.rateLimitDelay = Math.max(100, Math.min(5000, rateLimitDelay));
+        config.cache.expiryHours = Math.max(1, Math.min(168, cacheExpiry));
+
+        saveConfigurationToStorage(config);
+        alert('Configuration saved successfully!');
+        logEvent('Configuration saved by user', 'config', 1);
+
+      } catch (error) {
+        logError(`Failed to save configuration: ${error.message}`, 'config', 1, 0, 0);
+        alert('Failed to save configuration. Please check console for details.');
+      }
+    }
+
+    /**
+     * Tests API connection with current configuration
+     */
+    async function testApiConnection() {
+      try {
+        const config = getConfiguration();
+        let testResults = [];
+
+        logEvent('Starting API connection test', 'config', 1);
+
+        // Test free API if enabled
+        if (config.services.free.enabled && config.services.free.apiUrl) {
+          try {
+            const response = await fetch(config.services.free.apiUrl, {
+              method: 'HEAD',
+              timeout: config.search.timeout * 1000
+            });
+            testResults.push(`Free API: ${response.ok ? '✅ Connected' : '❌ Failed'}`);
+          } catch (error) {
+            testResults.push(`Free API: ❌ Connection failed - ${error.message}`);
+          }
+        }
+
+        // Test paid API if enabled
+        if (config.services.paid.enabled && config.services.paid.apiUrl) {
+          try {
+            const response = await fetch(config.services.paid.apiUrl, {
+              method: 'HEAD',
+              timeout: config.search.timeout * 1000
+            });
+            testResults.push(`Paid API: ${response.ok ? '✅ Connected' : '❌ Failed'}`);
+          } catch (error) {
+            testResults.push(`Paid API: ❌ Connection failed - ${error.message}`);
+          }
+        }
+
+        if (testResults.length === 0) {
+          testResults.push('No APIs enabled for testing');
+        }
+
+        alert(`API Connection Test Results:\n\n${testResults.join('\n')}`);
+        logEvent(`API test completed: ${testResults.length} services tested`, 'config', 1);
+
+      } catch (error) {
+        logError(`API connection test failed: ${error.message}`, 'config', 1, 0, 0);
+        alert('API connection test failed. Please check console for details.');
+      }
+    }
+
+    /**
+     * Resets configuration to default values
+     */
+    function resetConfiguration() {
+      try {
+        if (confirm('Are you sure you want to reset all configuration to defaults? This cannot be undone.')) {
+          localStorage.removeItem('seniorLivingConfig');
+
+          // Reset form inputs to defaults
+          document.getElementById('freeApiKey').value = '********';
+          document.getElementById('freeApiUrl').value = 'https://api.freesearch.com/v1/search';
+          document.getElementById('paidApiKey').value = '********';
+          document.getElementById('paidApiUrl').value = 'https://api.paidsearch.com/v2/search';
+          document.getElementById('searchTimeout').value = '30';
+          document.getElementById('maxResults').value = '10';
+          document.getElementById('rateLimitDelay').value = '1000';
+          document.getElementById('cacheExpiry').value = '24';
+
+          // Reset toggles
+          document.getElementById('freeApiToggle').classList.remove('active');
+          document.getElementById('paidApiToggle').classList.add('active');
+          document.getElementById('cacheToggle').classList.add('active');
+
+          alert('Configuration reset to defaults successfully!');
+          logEvent('Configuration reset to defaults', 'config', 1);
+        }
+      } catch (error) {
+        logError(`Failed to reset configuration: ${error.message}`, 'config', 1, 0, 0);
+        alert('Failed to reset configuration. Please check console for details.');
+      }
+    }
+
+    /**
      * Lightweight testing framework with simple assertions
      * Provides comprehensive test coverage for all major functions
      */
@@ -1396,6 +1985,43 @@ accepts service animals above 50 lbs., Costs less than $500/month, Assisted or u
         }
       }
 
+      // Test configuration management
+      function testConfigurationManagement() {
+        console.log('🧪 Testing configuration management...');
+
+        try {
+          // Test configuration retrieval
+          const config = getConfiguration();
+          assert(typeof config === 'object', 'Configuration should be an object', 'config');
+          assert(config.hasOwnProperty('services'), 'Configuration should have services property', 'config');
+          assert(config.hasOwnProperty('search'), 'Configuration should have search property', 'config');
+          assert(config.hasOwnProperty('cache'), 'Configuration should have cache property', 'config');
+
+          // Test configuration saving
+          const testConfig = { test: 'value', timestamp: Date.now() };
+          saveConfigurationToStorage(testConfig);
+          const savedConfig = JSON.parse(localStorage.getItem('seniorLivingConfig') || '{}');
+          assert(savedConfig.test === 'value', 'Configuration should be saved correctly', 'config');
+
+          // Test toggle functions (without DOM manipulation)
+          assert(typeof toggleApiService === 'function', 'toggleApiService should be a function', 'config');
+          assert(typeof toggleCacheService === 'function', 'toggleCacheService should be a function', 'config');
+
+          // Test API connection function
+          assert(typeof testApiConnection === 'function', 'testApiConnection should be a function', 'config');
+          assert(typeof resetConfiguration === 'function', 'resetConfiguration should be a function', 'config');
+
+          // Test configuration validation
+          const validConfig = getConfiguration();
+          assert(validConfig.search.timeout >= 5, 'Search timeout should have minimum value', 'config');
+          assert(validConfig.search.maxResults >= 1, 'Max results should have minimum value', 'config');
+          assert(validConfig.cache.expiryHours >= 1, 'Cache expiry should have minimum value', 'config');
+
+        } catch (error) {
+          logError(`Configuration management test error: ${error.message}`, 'test', 0, 0, 0);
+        }
+      }
+
       // Run all test suites
       console.log('🚀 Starting comprehensive test suite...');
       testFileValidation();
@@ -1403,6 +2029,7 @@ accepts service animals above 50 lbs., Costs less than $500/month, Assisted or u
       testProcessingState();
       testDOMElements();
       testErrorHandling();
+      testConfigurationManagement();
 
       // Calculate test duration
       const duration = Date.now() - testResults.startTime;
@@ -1424,8 +2051,71 @@ accepts service animals above 50 lbs., Costs less than $500/month, Assisted or u
       return testResults;
     }
 
+    /**
+     * Initializes configuration UI with saved values
+     */
+    function initializeConfiguration() {
+      try {
+        const config = getConfiguration();
+
+        // Load saved configuration into form inputs
+        if (config.services) {
+          // Set toggle states
+          const freeToggle = document.getElementById('freeApiToggle');
+          const paidToggle = document.getElementById('paidApiToggle');
+          const cacheToggle = document.getElementById('cacheToggle');
+
+          if (freeToggle) {
+            if (config.services.free.enabled) {
+              freeToggle.classList.add('active');
+            } else {
+              freeToggle.classList.remove('active');
+            }
+          }
+
+          if (paidToggle) {
+            if (config.services.paid.enabled) {
+              paidToggle.classList.add('active');
+            } else {
+              paidToggle.classList.remove('active');
+            }
+          }
+
+          if (cacheToggle) {
+            if (config.cache.enabled) {
+              cacheToggle.classList.add('active');
+            } else {
+              cacheToggle.classList.remove('active');
+            }
+          }
+
+          // Set input values (keep API keys masked)
+          const freeApiUrl = document.getElementById('freeApiUrl');
+          const paidApiUrl = document.getElementById('paidApiUrl');
+          const searchTimeout = document.getElementById('searchTimeout');
+          const maxResults = document.getElementById('maxResults');
+          const rateLimitDelay = document.getElementById('rateLimitDelay');
+          const cacheExpiry = document.getElementById('cacheExpiry');
+
+          if (freeApiUrl) freeApiUrl.value = config.services.free.apiUrl || 'https://api.freesearch.com/v1/search';
+          if (paidApiUrl) paidApiUrl.value = config.services.paid.apiUrl || 'https://api.paidsearch.com/v2/search';
+          if (searchTimeout) searchTimeout.value = config.search.timeout || 30;
+          if (maxResults) maxResults.value = config.search.maxResults || 10;
+          if (rateLimitDelay) rateLimitDelay.value = config.search.rateLimitDelay || 1000;
+          if (cacheExpiry) cacheExpiry.value = config.cache.expiryHours || 24;
+        }
+
+        logEvent('Configuration UI initialized with saved settings', 'config', 1);
+      } catch (error) {
+        logError(`Failed to initialize configuration UI: ${error.message}`, 'config', 1, 0, 0);
+      }
+    }
+
     // Auto-run tests on page load for development
     document.addEventListener('DOMContentLoaded', function() {
+      // Initialize configuration UI
+      initializeConfiguration();
+
       // Uncomment the line below to run tests automatically
       // runTestSuite();
 

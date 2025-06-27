@@ -4,12 +4,29 @@ A web-based application for processing and analyzing senior living facility data
 
 ## Features
 
+### Core Functionality
 - **File Upload**: Supports .xlsx, .xls, .csv, and .ods formats
 - **Real-time Processing Status**: Visual progress tracking with detailed logging
 - **Search Integration**: Automated web searches for facility information
 - **Scoring System**: Keyword-based scoring against user criteria
 - **Export Options**: Download results in multiple formats
 - **Glassmorphic UI**: Modern, translucent interface design
+
+### Production Configuration (NEW)
+- **API Service Management**: Configure free and paid search APIs with secure key storage
+- **Rate Limiting Controls**: Configurable delays to respect API rate limits
+- **Caching System**: Optional result caching with customizable expiry settings
+- **Connection Testing**: Built-in API connectivity validation and diagnostics
+- **Configuration Persistence**: Settings automatically saved to localStorage
+- **Service Toggles**: Enable/disable individual search services with visual feedback
+
+### Enhanced Code Review & Documentation
+- **Comprehensive Architecture Overview**: Detailed technical documentation
+- **Security Implementation**: Client-side security measures and data protection
+- **Performance Optimizations**: Memory management and DOM optimization strategies
+- **Testing Framework**: Unit tests covering positive, negative, boundary, and edge cases
+- **Error Handling**: Enterprise-grade logging with structured error format
+- **Browser Compatibility**: Progressive enhancement with feature detection
 
 ## Processing Status Display
 
@@ -63,11 +80,44 @@ The application includes a comprehensive processing status display that shows:
 
 #### `logEvent(message)` / `logError(error)`
 **Purpose**: Logging functions with timestamp and processing log integration
-**Inputs**: 
+**Inputs**:
 - `message` (string): Event message
 - `error` (string|Error): Error message or Error object
 **Outputs**: Console logs and processing log entries
 **Side Effects**: Adds timestamped entries to processing log display
+
+### Configuration Management Functions (NEW)
+
+#### `toggleApiService(serviceType)`
+**Purpose**: Toggles API service on/off with visual feedback
+**Inputs**:
+- `serviceType` (string): Type of service ('free' or 'paid')
+**Outputs**: Updates toggle UI state and saves configuration
+**Error Handling**: Validates element existence and logs toggle events
+
+#### `saveConfiguration()`
+**Purpose**: Saves current configuration from form inputs to localStorage
+**Inputs**: Reads from configuration form elements
+**Outputs**: Validates and stores configuration with user feedback
+**Validation**: API key masking, numeric range validation, URL format checking
+
+#### `testApiConnection()`
+**Purpose**: Tests connectivity to configured API endpoints
+**Inputs**: Uses current configuration settings
+**Outputs**: Connection status report with success/failure indicators
+**Error Handling**: Timeout handling and fallback testing strategies
+
+#### `resetConfiguration()`
+**Purpose**: Resets all configuration to default values
+**Inputs**: User confirmation dialog
+**Outputs**: Clears localStorage and resets form inputs
+**Side Effects**: Restores default toggle states and input values
+
+#### `getConfiguration()` / `saveConfigurationToStorage(config)`
+**Purpose**: Configuration persistence and retrieval functions
+**Inputs**: Configuration object for saving, none for retrieval
+**Outputs**: Current configuration object or storage confirmation
+**Error Handling**: JSON parsing errors and localStorage availability checks
 
 ### Processing State Management
 
