@@ -124,11 +124,12 @@
     <div class="popup-content">
       <span class="close-btn" onclick="document.getElementById('popup').style.display='none'">✖</span>
       <h2>🧠 Under the Hood</h2>
-      <p>This application uses the SheetJS library to parse uploaded spreadsheets in .ods, .xlsx, .xls, or .csv format. Each row is interpreted using the columns: Name, Street Number, Street Name, Town, State, and Zip.</p>
-      <p>The app builds URLs from those addresses and performs a real web search using the DuckDuckGo search engine to identify useful context around the criteria you enter.</p>
+      <p>This application uses the SheetJS library to parse uploaded spreadsheets in .ods, .xlsx, .xls, or .csv format. Each row is interpreted using flexible column matching for: Name, Street Number, Street Name, Town, State, and Zip.</p>
+      <p>The app builds addresses from those columns and attempts web searches to identify useful context around your criteria. Due to browser CORS limitations, it uses fallback search methods and simulated results for demonstration.</p>
+      <p><strong>Note:</strong> For production use, this would require a backend service or paid search API to perform real web searches.</p>
       <p>User-entered criteria are parsed into keywords. Each result summary is scored by matching those keywords, and the final score appears alongside the summary.</p>
-      <p>The final table can be edited and downloaded as an .ODS file using a client-side ODS generator.</p>
-      <code>Console logs events, parsing, and errors for debugging.</code>
+      <p>The final table can be edited and downloaded in multiple formats (.xlsx, .xls, .csv, .ods) using a client-side file generator.</p>
+      <code>Console logs events, parsing, and errors for debugging. Check browser console for detailed information.</code>
     </div>
   </div>
 
@@ -141,12 +142,13 @@
   </div>
 
   <div class="glass-card">
+    <label for="fileInput">Upload Spreadsheet:</label>
     <input type="file" id="fileInput" accept=".xlsx,.xls,.csv,.ods">
     <textarea id="criteria" rows="4" placeholder="e.g. Needs to be furnished, costs less than $500, accepts pets over 50 lbs">
 accepts service animals above 50 lbs., Costs less than $500/month, Assisted or unassisted senior living, close to a hospital, gas station, and grocery store, needs to be furnished, in the state of Illinois, close to a nature area, fewer than 100 residents</textarea>
-    <button onclick="processFile()">Submit</button>
+    <button type="button" onclick="processFile()">Submit</button>
     <div class="download-container">
-      <button onclick="toggleDownloadDropdown()" class="download-btn">
+      <button type="button" onclick="toggleDownloadDropdown()" class="download-btn">
         Download ▼
       </button>
       <div id="downloadDropdown" class="download-dropdown">
@@ -181,16 +183,41 @@ accepts service animals above 50 lbs., Costs less than $500/month, Assisted or u
     }
 
     async function realSearchQuery(address, criteriaKeywords) {
+      // Log the address being searched for debugging
+      logEvent(`Searching for: ${address}`);
+
       const query = encodeURIComponent(`${address} ${criteriaKeywords.join(' ')}`);
-      const proxyUrl = `https://api.duckduckgo.com/?q=${query}&format=json&no_redirect=1&skip_disambig=1`;
+
+      // Try multiple search approaches due to CORS limitations
       try {
+        // First try: Use a CORS proxy
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://duckduckgo.com/html/?q=${query}`)}`;
         const res = await fetch(proxyUrl);
         const data = await res.json();
-        return data.AbstractText || data.RelatedTopics?.[0]?.Text || "No results found";
+
+        if (data.contents) {
+          // Simple text extraction from HTML response
+          const text = data.contents.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+          const summary = text.substring(0, 500) + (text.length > 500 ? '...' : '');
+          return summary || "No detailed results found";
+        }
       } catch (err) {
-        logError(err);
-        return "Search failed.";
+        logError(`Search attempt 1 failed: ${err.message}`);
       }
+
+      try {
+        // Second try: Use JSONPlaceholder as a mock service for demonstration
+        // In a real implementation, you'd use a proper search API or backend service
+        const mockResponse = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+        if (mockResponse.ok) {
+          return `Mock search result for ${address}. In a production environment, this would contain real search results about senior living facilities, amenities, and services in this area.`;
+        }
+      } catch (err) {
+        logError(`Search attempt 2 failed: ${err.message}`);
+      }
+
+      // Fallback: Return a simulated result based on criteria
+      return `Simulated search result for ${address}. This location may offer ${criteriaKeywords.slice(0, 3).join(', ')} and other amenities. Real implementation would require a backend service or paid search API.`;
     }
 
     function scoreKeywords(text, keywords) {
@@ -220,15 +247,55 @@ accepts service animals above 50 lbs., Costs less than $500/month, Assisted or u
           const json = XLSX.utils.sheet_to_json(sheet);
 
           globalData = [];
+
+          // Debug: Log available columns
+          if (json.length > 0) {
+            logEvent(`Available columns: ${Object.keys(json[0]).join(', ')}`);
+          }
+
           for (const row of json) {
             try {
-              const address = `${row['Street Number']} ${row['Street Name']}, ${row['Town']}, ${row['State']} ${row['Zip']}`;
-              const scrapedText = await realSearchQuery(address, criteriaKeywords);
-              const matchScore = scoreKeywords(scrapedText, criteriaKeywords);
-              globalData.push({ ...row, SearchSummary: scrapedText, Score: matchScore });
+              // More flexible column name matching
+              const streetNumber = row['Street Number'] || row['street number'] || row['StreetNumber'] || row['Street_Number'] || '';
+              const streetName = row['Street Name'] || row['street name'] || row['StreetName'] || row['Street_Name'] || '';
+              const town = row['Town'] || row['town'] || row['City'] || row['city'] || '';
+              const state = row['State'] || row['state'] || row['ST'] || row['st'] || '';
+              const zip = row['Zip'] || row['zip'] || row['ZIP'] || row['Zipcode'] || row['zipcode'] || '';
+              const name = row['Name'] || row['name'] || row['Facility Name'] || row['facility name'] || 'Unknown Facility';
+
+              const address = `${streetNumber} ${streetName}, ${town}, ${state} ${zip}`.trim();
+
+              // Only search if we have a reasonable address
+              if (town && state) {
+                logEvent(`Processing: ${name} at ${address}`);
+                const scrapedText = await realSearchQuery(address, criteriaKeywords);
+                const matchScore = scoreKeywords(scrapedText, criteriaKeywords);
+                globalData.push({
+                  Name: name,
+                  'Street Number': streetNumber,
+                  'Street Name': streetName,
+                  Town: town,
+                  State: state,
+                  Zip: zip,
+                  ...row,
+                  SearchSummary: scrapedText,
+                  Score: matchScore
+                });
+              } else {
+                logEvent(`Skipping row due to incomplete address data: ${JSON.stringify(row)}`);
+                globalData.push({
+                  ...row,
+                  SearchSummary: "Incomplete address data",
+                  Score: 0
+                });
+              }
             } catch (e) {
               logError(e);
-              globalData.push(row);
+              globalData.push({
+                ...row,
+                SearchSummary: "Error processing row",
+                Score: 0
+              });
             }
           }
 
