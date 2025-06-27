@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Column Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <h2>Test Column Detection</h2>
+    <input type="file" id="testFile" accept=".csv,.xlsx,.xls,.ods">
+    <button onclick="testColumns()">Test Columns</button>
+    <div id="output"></div>
+
+    <script>
+        function testColumns() {
+            const fileInput = document.getElementById('testFile');
+            const file = fileInput.files[0];
+            if (!file) return alert("Please select a file first.");
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const sheetName = workbook.SheetNames[0];
+                    const sheet = workbook.Sheets[sheetName];
+                    const json = XLSX.utils.sheet_to_json(sheet);
+
+                    if (json.length > 0) {
+                        const columns = Object.keys(json[0]);
+                        const output = document.getElementById('output');
+                        output.innerHTML = `
+                            <h3>Detected Columns:</h3>
+                            <ul>${columns.map(col => `<li>${col}</li>`).join('')}</ul>
+                            <h3>First Row Data:</h3>
+                            <pre>${JSON.stringify(json[0], null, 2)}</pre>
+                        `;
+                    }
+                } catch (err) {
+                    alert("Error: " + err.message);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+    </script>
+</body>
+</html>
