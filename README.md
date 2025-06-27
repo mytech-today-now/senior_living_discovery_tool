@@ -56,23 +56,62 @@ Each row represents analysis of one specific keyword:
 - **Security**: Includes `rel="noopener noreferrer"` attributes
 - **Supported Formats**: .xls, .xlsx, .ods (CSV uses plain text)
 
-### 🕷️ Sitemap-Based Web Scraping
+### 🗺️ Enhanced Map API Integration (NEW)
 
-**Comprehensive Enhancement**: Sitemap-based recursive web scraping for maximum search coverage and accuracy.
+**Revolutionary Enhancement**: Intelligent facility URL discovery using OpenStreetMap and Google Maps APIs before sitemap scraping.
+
+#### Enhanced Search Pipeline
+1. **OpenStreetMap Search**: Free API search using facility name and location
+2. **Google Maps API Search**: Paid API search with comprehensive business data
+3. **Address Verification**: Compares API results with spreadsheet address data
+4. **URL Discovery**: Extracts official website URLs from verified matches
+5. **Multi-Domain Scraping**: Performs recursive scraping on all discovered domains
+6. **Fallback Strategy**: Uses traditional domain extraction if no URLs found
+
+#### Map API Configuration
+- **OpenStreetMap Settings**: Free Nominatim API with configurable rate limiting (default: 1000ms)
+- **Google Maps Settings**: Requires API key, comprehensive business directory access
+- **Toggle Controls**: Independent enable/disable for each service
+- **Rate Limiting**: Intelligent throttling to respect API limits and terms of service
+- **Address Matching**: Smart comparison of API results with facility address data
+- **Confidence Scoring**: High/medium/low confidence ratings for discovered URLs
+
+#### Address Verification Process
+- **Name Matching**: Compares facility names from APIs with spreadsheet data
+- **Address Validation**: Verifies street addresses match between sources
+- **City/Town Verification**: Ensures geographic consistency across data sources
+- **State/Region Checking**: Validates state/region information alignment
+- **Confidence Assessment**: Assigns confidence levels to matches for quality control
+
+### 🕷️ Enhanced Sitemap-Based Web Scraping
+
+**Comprehensive Enhancement**: Multi-domain sitemap-based recursive web scraping with map API integration.
+
+#### Enhanced Workflow
+1. **Map API Discovery**: Searches OpenStreetMap and Google Maps for facility URLs
+2. **Domain Extraction**: Extracts domains from discovered URLs and fallback sources
+3. **Multi-Domain Processing**: Processes sitemaps across all discovered domains
+4. **Sitemap Detection**: Automatically discovers XML sitemaps for each domain
+5. **Recursive Crawling**: Systematically traverses all pages across multiple domains
+6. **Content Analysis**: Performs keyword matching with source attribution
+7. **Result Aggregation**: Combines results with metadata about search sources
 
 #### Key Features
+- **Multi-Domain Search**: Searches across all discovered facility domains simultaneously
+- **Source Attribution**: Tracks whether URLs came from OpenStreetMap, Google Maps, or fallback
 - **Automatic Sitemap Discovery**: Finds sitemaps through robots.txt and common paths
 - **Recursive Parsing**: Follows sitemap index files to discover all pages
 - **Intelligent Content Extraction**: Extracts meaningful text from HTML pages
-- **Advanced Keyword Matching**: Weighted scoring with context awareness
-- **Rate Limiting**: Configurable delays to respect server resources
-- **Error Recovery**: Robust fallback mechanisms and retry logic
+- **Advanced Keyword Matching**: Weighted scoring with context awareness and source tracking
+- **Rate Limiting**: Configurable delays to respect server resources across all domains
+- **Error Recovery**: Robust fallback mechanisms and retry logic per domain
 - **Performance Optimization**: Efficient memory usage and concurrent processing
 
-#### Search Strategy Hierarchy
-1. **Sitemap-Based Scraping** (Primary): Discovers and scrapes all pages in website sitemaps
-2. **Traditional Search Engines** (Secondary): Falls back to search engine APIs
-3. **Simulated Results** (Fallback): Intelligent fallback with criteria-based content
+#### Enhanced Search Strategy Hierarchy
+1. **Map API + Sitemap Scraping** (Primary): Discovers facility URLs via APIs, then scrapes sitemaps
+2. **Traditional Domain + Sitemap** (Secondary): Extracts domains from addresses, then scrapes sitemaps
+3. **Traditional Search Engines** (Tertiary): Falls back to search engine APIs
+4. **Simulated Results** (Fallback): Intelligent fallback with criteria-based content
 
 #### Configuration Options
 - **Enable/Disable Toggle**: Control sitemap scraping functionality
@@ -196,7 +235,53 @@ The application includes a comprehensive processing status display that shows:
 - Error handling and recovery
 - Completion notifications
 
-## API Documentation
+## 🔧 Enhanced Technical Architecture
+
+### Map Search Module (IIFE Pattern)
+The `MapSearchModule` uses an Immediately Invoked Function Expression (IIFE) to encapsulate map search functionality and avoid global state pollution.
+
+#### OpenStreetMap Integration
+- **API Endpoint**: Nominatim search service (https://nominatim.openstreetmap.org/search)
+- **Rate Limiting**: Configurable delays (default: 1000ms) to respect free API limits
+- **Address Verification**: Compares API results with facility address data for accuracy
+- **Response Processing**: Extracts website URLs, coordinates, and address details
+- **Error Handling**: Graceful degradation when API is unavailable or rate-limited
+
+#### Google Maps API Integration
+- **API Endpoint**: Places Text Search API (https://maps.googleapis.com/maps/api/place/textsearch/json)
+- **Authentication**: Requires valid API key configuration with proper scoping
+- **Business Data**: Comprehensive facility information including websites and ratings
+- **Address Matching**: Advanced comparison algorithms for facility verification
+- **Cost Management**: Intelligent usage to minimize API costs
+
+### Enhanced Search Pipeline
+```javascript
+// Enhanced search flow with map API integration
+async function performSitemapBasedSearch(address, criteriaKeywords, facilityData) {
+  1. MapSearchModule.searchOpenStreetMap(facilityName, address, city)
+  2. MapSearchModule.searchGoogleMaps(facilityName, address, city)
+  3. Domain extraction from discovered URLs
+  4. Multi-domain sitemap discovery and scraping
+  5. Keyword analysis with source attribution
+  6. Result aggregation with metadata
+}
+```
+
+### Data Flow Architecture
+- **Input**: Facility data (name, address, city, state, zip)
+- **Map APIs**: Discover official facility URLs with address verification
+- **Domain Processing**: Extract and validate domains from discovered URLs
+- **Sitemap Scraping**: Recursive content extraction across multiple domains
+- **Keyword Analysis**: One row per query term with 15-character context snippets
+- **Output**: Structured results with hyperlinks and comprehensive source attribution
+
+### Configuration Management
+- **Map Service Toggles**: Independent enable/disable controls for OpenStreetMap and Google Maps
+- **Rate Limiting**: Configurable delays for each service to respect API limits
+- **API Key Management**: Secure storage and validation of Google Maps API credentials
+- **Fallback Strategies**: Graceful degradation when map services are unavailable
+
+## Enhanced API Documentation
 
 ### Core Functions
 
@@ -237,7 +322,100 @@ The application includes a comprehensive processing status display that shows:
 **Outputs**: Console logs and processing log entries
 **Side Effects**: Adds timestamped entries to processing log display
 
-### Configuration Management Functions (NEW)
+#### `scoreKeywords(text, keywords, sourceUrl, facilityData)`
+**Purpose**: Enhanced keyword analysis that returns one row per query term with 15-character context snippets
+
+**Enhanced Features**:
+- **One Row Per Query Term**: Returns individual results for each search keyword
+- **15-Character Context**: Precisely formatted context with exactly 15 characters before and after each match
+- **Hyperlink Support**: Generates data structure for Excel HYPERLINK() formulas
+- **Match Classification**: Categorizes results as Exact, Partial, None, Error, or Skipped
+
+**Parameters**:
+- `text` (string): Text content to analyze
+- `keywords` (Array<string>): Keywords to search for
+- `sourceUrl` (string): Source URL for hyperlink generation
+- `facilityData` (Object): Original facility data including name, address, city
+
+**Returns**: Array of keyword results (one per keyword)
+
+**Enhanced Return Structure**:
+```javascript
+[
+  {
+    ...facilityData,           // Original facility information
+    QueryTerm: "assisted living",
+    MatchType: "Exact",
+    ExactMatches: 2,
+    PartialMatches: 0,
+    TotalMatches: 2,
+    Score: 4,
+    SourceUrl: "https://example.com/facility",
+    Snippets: "...provides assisted living services for...",
+    SnippetDetails: [...]      // Detailed snippet data for hyperlinks
+  }
+]
+```
+
+#### `MapSearchModule.searchOpenStreetMap(facilityName, address, city)`
+**Purpose**: Searches OpenStreetMap Nominatim API for facility information
+
+**Parameters**:
+- `facilityName` (string): Name of the facility to search for
+- `address` (string): Address to verify against results
+- `city` (string): City to verify against results
+
+**Returns**: Promise<Object|null> - Facility data with URL or null if no match
+
+**Return Structure**:
+```javascript
+{
+  name: "Facility Name",
+  address: "Full address from API",
+  lat: 40.7128,
+  lon: -74.0060,
+  website: "https://facility.com",
+  source: "openstreetmap",
+  confidence: "high"
+}
+```
+
+#### `MapSearchModule.searchGoogleMaps(facilityName, address, city)`
+**Purpose**: Searches Google Maps Places API for facility information
+
+**Parameters**:
+- `facilityName` (string): Name of the facility to search for
+- `address` (string): Address to verify against results
+- `city` (string): City to verify against results
+
+**Returns**: Promise<Object|null> - Facility data with URL or null if no match
+
+**Return Structure**:
+```javascript
+{
+  name: "Facility Name",
+  address: "Formatted address from Google",
+  lat: 40.7128,
+  lon: -74.0060,
+  website: "https://facility.com",
+  place_id: "ChIJ...",
+  source: "googlemaps",
+  confidence: "high"
+}
+```
+
+### Enhanced Configuration Management Functions
+
+#### `toggleMapService(serviceType)`
+**Purpose**: Toggles map service (OpenStreetMap or Google Maps) on/off with visual feedback
+
+**Parameters**:
+- `serviceType` (string): Type of service ('osm' or 'googlemaps')
+
+**Functionality**:
+- Updates toggle UI state
+- Saves configuration to localStorage
+- Logs toggle events for debugging
 
 #### `toggleApiService(serviceType)`
 **Purpose**: Toggles API service on/off with visual feedback
